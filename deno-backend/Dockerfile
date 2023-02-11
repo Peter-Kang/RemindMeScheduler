@@ -11,4 +11,4 @@ CMD ["run","--allow-net", "Webserver.ts"]
 #["run", "--allow-env", "--allow-net", "--allow-read", "--allow-write", "Webserver.ts"]
 #replace index.js with starting point
 # default port exposure
-EXPOSE 8000
+EXPOSE 8080

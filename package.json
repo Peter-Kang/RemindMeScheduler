@@ -6,5 +6,7 @@
   "author": "Peter Kang <pxk7062@rit.edu>",
   "license": "MIT",
   "scripts": {
+    "start": "docker-compose up -d --build",
+    "stop": "docker-compose down"
   }
 }
