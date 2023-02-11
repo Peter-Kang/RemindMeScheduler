@@ -1,0 +1,27 @@
+version: '0'
+name: 'React-Deno'
+services:
+  react:
+    build:
+      context: . #move to the root of folder struct
+      dockerfile: /react-frontend/Dockerfile
+    image: react-frontend-image
+    container_name: react-frontend-container
+    volumes:
+       - ${PWD-.}/react-app:/usr/src/app/react-frontend
+       - /usr/src/app/react-frontend/node_modules
+    ports:
+      - '3000:3000' #for docker to know where to redirect hot module reload queries
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+  deno:
+    build:
+      context: ./deno-backend
+      dockerfile: Dockerfile
+    image: deno-image
+    container_name: deno-container
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000

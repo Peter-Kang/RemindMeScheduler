@@ -1,0 +1,10 @@
+{
+  "name": "ScheduleTimer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Peter-Kang/ScheduleTimer.git",
+  "author": "Peter Kang <pxk7062@rit.edu>",
+  "license": "MIT",
+  "scripts": {
+  }
+}
