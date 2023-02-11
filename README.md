@@ -5,3 +5,9 @@ Reminder App
 ```
 yarn run start
 ```
+
+# Debug into image
+```
+docker run -it <image-name> sh
+```
+
