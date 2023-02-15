@@ -7,6 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "docker-compose up -d --build",
-    "stop": "docker-compose down"
+    "stop": "docker-compose down && docker system prune -a -f"
+  },
+  "devDependencies": {
   }
 }
