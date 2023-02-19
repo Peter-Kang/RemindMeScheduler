@@ -9,6 +9,12 @@ const Current = ()=>
         <Container>
             <br/>
             <Row className="d-flex align-items-center">
+                <Col md={12} className="d-flex justify-content-end">
+                    <Button variant="success" >Edit</Button>
+                </Col>
+            </Row>
+            <br/>
+            <Row className="d-flex align-items-center">
                 <Col md={12}>
                     <Alert variant="success">
                         <Row>
