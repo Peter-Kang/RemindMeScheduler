@@ -1,6 +1,6 @@
 import React from "react";
 import './Current.css';
-import {Container, Row, Col, Alert} from "react-bootstrap"
+import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 
 const Current = ()=>
@@ -10,7 +10,7 @@ const Current = ()=>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
-                    <Button variant="success" >Edit</Button>
+                    <Button variant="success" href={"/Edit"} >Edit</Button>
                 </Col>
             </Row>
             <br/>
@@ -28,7 +28,6 @@ const Current = ()=>
                     </Alert>
                 </Col>
             </Row>
-            
         </Container>
     );
 }
