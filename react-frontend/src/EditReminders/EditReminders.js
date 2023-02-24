@@ -44,6 +44,17 @@ const EditReminders = ()=>
                 </Col>
                 <Col col-sm>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
             </Row>
+            <br/>
+            <h2><font color='white'>Edit</font></h2>
+            <br/>
+            <Row md={12}className="d-flex align-items-center">
+                <Col col-sm>ID</Col>
+                <Col col-sm>Message</Col>
+                <Col col-sm>Frequency</Col>
+                <Col col-sm>Start DateTime</Col>
+                <Col col-sm>Update</Col>
+                <Col col-sm>Remove</Col>
+            </Row>
         </Container>
     );
 }
