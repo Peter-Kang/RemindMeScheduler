@@ -1,3 +1,31 @@
-.container{
+.container
+{
     background-color: #282c34;
+}
+
+.MuiTextField-root > label {
+    color: white;
+}
+
+.MuiInputBase-colorPrimary
+{
+    color: white;
+}
+
+.MuiSvgIcon-root
+{
+    color: white;
+}
+
+.MuiOutlinedInput-notchedOutline
+{
+    border-color: white;
+}
+
+.createStartDatePicker fieldset.MuiOutlinedInput-notchedOutline {
+    border-color: white;
+}
+
+.Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
+    border-color: white;
 }
