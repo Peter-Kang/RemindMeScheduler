@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Current from "./CurrentReminders/Current";
-import Edit from "./EditReminders/EditReminders";
+import Current from "./pages/CurrentReminders/Current";
+import Edit from "./pages/EditReminders/EditReminders";
 
 function App() {
   return (
