@@ -48,12 +48,12 @@ const EditReminders = ()=>
             <h2><font color='white'>Edit</font></h2>
             <br/>
             <Row md={12}className="d-flex align-items-center">
-                <Col col-sm>ID</Col>
-                <Col col-sm>Message</Col>
-                <Col col-sm>Frequency</Col>
-                <Col col-sm>Start DateTime</Col>
-                <Col col-sm>Update</Col>
-                <Col col-sm>Remove</Col>
+                <Col col-sm><font color='white'>ID</font></Col>
+                <Col col-sm><font color='white'>Message</font></Col>
+                <Col col-sm><font color='white'>Frequency</font></Col>
+                <Col col-sm><font color='white'>Start DateTime</font></Col>
+                <Col col-sm><font color='white'>Update</font></Col>
+                <Col col-sm><font color='white'>Remove</font></Col>
             </Row>
         </Container>
     );
