@@ -1,5 +1,5 @@
 import React from "react";
-import './Current.css';
+import '../../assets/Current.css';
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 

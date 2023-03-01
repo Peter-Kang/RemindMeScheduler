@@ -1,5 +1,5 @@
 import React from "react";
-import './EditReminders.css';
+import '../../assets/EditReminders.css';
 //bootstrap
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
