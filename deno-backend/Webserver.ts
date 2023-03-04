@@ -2,11 +2,12 @@
 const server = Deno.listen({ port: 8080 });
 console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
 
+
 // Connections to the server will be yielded up as an async iterable.
 for await (const conn of server) {
   // In order to not be blocking, we need to handle each connection individually
   // without awaiting the function
-  serveHttp(conn);
+    serveHttp(conn);
 }
 
 async function serveHttp(conn: Deno.Conn) {
@@ -17,15 +18,44 @@ async function serveHttp(conn: Deno.Conn) {
   for await (const requestEvent of httpConn) {
     // The native HTTP server uses the web standard `Request` and `Response`
     // objects.
-    const body = `Your user-agent is:\n\n${
-      requestEvent.request.headers.get("user-agent") ?? "Unknown"
-    }`;
+    let body = '';
+    if( requestEvent.request.method === 'GET' )
+    {
+      const url = new URL(requestEvent.request.url, `http://${requestEvent.request.headers.get('host')}`);
+      if( url.pathname === '/HealthCheck' )
+      {
+        body = 'true!';
+      }
+      else
+      {
+        body = `Your user-agent is:\n\n${
+          requestEvent.request.headers.get("user-agent") ?? "Unknown"
+        }`;
+      }
+    }
+    
     // The requestEvent's `.respondWith()` method is how we send the response
-    // back to the client.
-    requestEvent.respondWith(
-      new Response(body, {
-        status: 200,
-      }),
-    );
+      // back to the client.
+      requestEvent.respondWith(
+        new Response(body, {
+          status: 200,
+        }),
+      );
   }
 }
+/*
+for await (const req of serverreq) {
+  if (req.method === 'GET') {
+    const url = new URL(req.url, `http://${req.headers.get('host')}`);
+    if (url.pathname === 'HealCheck') {
+      const response = await fetch('True');
+      const json = await response.json();
+      req.respond({ body: JSON.stringify(json) });
+    } else {
+      req.respond({ status: 404 });
+    }
+  } else {
+    req.respond({ status: 405, body: 'Method Not Allowed' });
+  }
+}
+*/

@@ -21,6 +21,8 @@ services:
       dockerfile: Dockerfile
     image: deno-image
     container_name: deno-container
+    volumes: 
+      - ./deno-backend:/app
     ports:
       - "8000:8080"
     environment:
