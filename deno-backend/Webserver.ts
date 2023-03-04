@@ -28,7 +28,7 @@ async function serveHttp(conn: Deno.Conn) {
       }
       else
       {
-        body = `Your user-agent is:\n\n${
+        body = `Alive! Your user-agent is:\n\n${
           requestEvent.request.headers.get("user-agent") ?? "Unknown"
         }`;
       }
