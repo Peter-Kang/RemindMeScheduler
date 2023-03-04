@@ -24,7 +24,7 @@ async function serveHttp(conn: Deno.Conn) {
       const url = new URL(requestEvent.request.url, `http://${requestEvent.request.headers.get('host')}`);
       if( url.pathname === '/HealthCheck' )
       {
-        body = 'true!';
+        body = 'true';
       }
       else
       {
