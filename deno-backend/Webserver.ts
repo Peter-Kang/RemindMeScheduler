@@ -43,19 +43,3 @@ async function serveHttp(conn: Deno.Conn) {
       );
   }
 }
-/*
-for await (const req of serverreq) {
-  if (req.method === 'GET') {
-    const url = new URL(req.url, `http://${req.headers.get('host')}`);
-    if (url.pathname === 'HealCheck') {
-      const response = await fetch('True');
-      const json = await response.json();
-      req.respond({ body: JSON.stringify(json) });
-    } else {
-      req.respond({ status: 404 });
-    }
-  } else {
-    req.respond({ status: 405, body: 'Method Not Allowed' });
-  }
-}
-*/
