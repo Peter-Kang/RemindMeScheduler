@@ -3,7 +3,7 @@ exports.env = {
       endpoint: {
         protocol:'http',
         host: 'localhost',
-        port: 5000,
+        port: 8000,
       },
     },
   }

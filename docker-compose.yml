@@ -28,4 +28,4 @@ services:
     environment:
       - PORT=8000
     expose:
-    - "8080"
+    - "8000"

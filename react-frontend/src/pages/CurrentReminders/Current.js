@@ -2,11 +2,13 @@ import React from "react";
 import '../../assets/Current.css';
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
+import { getHealthCheck } from '../../hooks/healthCheck.js'
 
 const Current = ()=>
 {
     return (
         <Container>
+            <button onClick={()=>getHealthCheck()} >Is Alive</button>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
