@@ -1,5 +1,5 @@
 version: '0'
-name: 'React-Deno'
+name: 'React-Deno-mongodb'
 services:
   react:
     build:
@@ -16,6 +16,7 @@ services:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
   deno:
+    user: "deno"
     build:
       context: ./deno-backend
       dockerfile: Dockerfile
@@ -29,3 +30,19 @@ services:
       - PORT=8000
     expose:
     - "8000"
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    env_file:
+      - ./.env
+    volumes:
+      - mongo:/data/db
+    ports:
+      - '6000:27017'
+
+volumes:
+  mongo:

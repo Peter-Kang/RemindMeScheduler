@@ -1,5 +1,4 @@
-import { oakCors } from 'https://deno.land/x/cors/mod.ts';
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router, oakCors } from './deps.ts';
 
 const app = new Application();
 const router = new Router();
@@ -10,7 +9,7 @@ app.use(async (requestEvent) => {
     const result = requestEvent.request.body(); 
     //requestEvent.response.body = await result.value;
     let body = '';
-    body = `Alive Update! Your user-agent is:\n\n${
+    body = `Alive!! Your user-agent is:\n\n${
       requestEvent.request.headers.get("user-agent") ?? "Unknown"
     }`;
     if( requestEvent.request.method === 'GET' )
@@ -18,7 +17,7 @@ app.use(async (requestEvent) => {
       const url = new URL(requestEvent.request.url, `http://${requestEvent.request.headers.get('host')}`);
       if( url.pathname === '/HealthCheck' )
       {
-        body = 'Alive!!';
+        body = 'Alive!';
       }
     }
     requestEvent.response.body = await body;

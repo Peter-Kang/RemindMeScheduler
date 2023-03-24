@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import { Link } from "react-router-dom";
 
 const EditReminders = ()=>
 {
@@ -19,7 +19,7 @@ const EditReminders = ()=>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
-                    <Button variant="btn btn-outline-success" href={"/"} >View</Button>
+                    <Link variant="success" to="/" className="btn btn-outline-success" >View</Link>
                 </Col>
             </Row>
             <br/>

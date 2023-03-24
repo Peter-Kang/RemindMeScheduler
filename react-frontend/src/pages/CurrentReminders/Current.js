@@ -2,17 +2,21 @@ import React from "react";
 import '../../assets/Current.css';
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import { getHealthCheck } from '../../hooks/healthCheck.js'
+import { getHealthCheck, useHealthCheck } from '../../hooks/healthCheck.js'
+import { Link } from "react-router-dom";
 
-const Current = ()=>
+const Current = () =>
 {
+    const {isAlive, retrigger} = useHealthCheck()
+
     return (
         <Container>
-            <button onClick={()=>getHealthCheck()} >Is Alive</button>
+            <Button onClick={retrigger}>Refresh</Button>
+            <span><font color ='white'>{' '}{isAlive}</font></span>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
-                    <Button variant="success" href={"/Edit"} >Edit</Button>
+                    <Link variant="success" to="/Edit" className="btn btn-success" >Edit</Link>
                 </Col>
             </Row>
             <br/>
