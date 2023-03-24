@@ -3,19 +3,19 @@ import '../../assets/EditReminders.css';
 //bootstrap
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-//mui
-import dayjs from 'dayjs';
-import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+//Date picker
+import { useDatePicker } from "./useDatePicker";
+import { useTodos } from "../../hooks/useTodos";
 import { Link } from "react-router-dom";
 
-const EditReminders = ()=>
+const EditReminders = () =>
 {
-    const [value, setValue] = React.useState(dayjs('2022-04-07'));
+    const {todos, createTodo} = useTodos()
+    const {DatePicker, value} = useDatePicker()
+
     return (
         <Container>
+            <Button onClick={() => createTodo({value})}>Create Todo</Button>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
@@ -28,19 +28,7 @@ const EditReminders = ()=>
                 <Col col-sm><font color='white'>Message: </font><input></input></Col>
                 <Col col-sm><font color='white'>Frequency in hours: </font><input></input></Col>
                 <Col col-sm>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateTimePicker
-                          renderInput={(props) => 
-                            <TextField {...props} 
-                                className="createStartDatePicker"
-                                sx={{svg: { color: 'white' },
-                                    input: { color: 'white' }
-                                }} 
-                            />}
-                          label="Starting DateTime:"
-                          value={value}
-                          onChange={(newValue) => {setValue(newValue);}}/>
-                    </LocalizationProvider>
+                    <DatePicker />
                 </Col>
                 <Col col-sm>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
             </Row>
