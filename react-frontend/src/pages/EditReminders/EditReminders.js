@@ -4,14 +4,14 @@ import '../../assets/EditReminders.css';
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 //Date picker
-import { useDatePicker } from "./useDatePicker";
+import { useScheduleDateTimePicker } from "./useDatePicker";
 import { useTodos } from "../../hooks/useTodos";
 import { Link } from "react-router-dom";
 
 const EditReminders = () =>
 {
     const {todos, createTodo} = useTodos()
-    const {DatePicker, value} = useDatePicker()
+    const {ScheduleDateTimePicker, value} = useScheduleDateTimePicker()
 
     return (
         <Container>
@@ -28,7 +28,7 @@ const EditReminders = () =>
                 <Col col-sm><font color='white'>Message: </font><input></input></Col>
                 <Col col-sm><font color='white'>Frequency in hours: </font><input></input></Col>
                 <Col col-sm>
-                    <DatePicker />
+                    <ScheduleDateTimePicker />
                 </Col>
                 <Col col-sm>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
             </Row>
