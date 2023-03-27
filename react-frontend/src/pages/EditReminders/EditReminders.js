@@ -50,6 +50,7 @@ const EditReminders = () =>
                 <Col col-sm>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
             </Row>
             <br/>
+            <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
             <Row md={12}className="d-flex align-items-center">

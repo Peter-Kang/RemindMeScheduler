@@ -36,3 +36,10 @@
 .MuiTypography-root{
     color: white !important;
 }
+hr{
+    background-color: white;
+    border-color: white;
+    color:white;
+    border-style:solid;
+    height: 2px;
+}
