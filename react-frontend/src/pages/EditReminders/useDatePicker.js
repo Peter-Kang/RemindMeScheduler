@@ -9,7 +9,7 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
 
 export const useScheduleDateTimePicker = () => {
-	const [value, setValue] = React.useState(dayjs('2022-04-07'));
+	const [startDateValue, setValue] = React.useState(dayjs('2022-04-17T15:30'));
 
 	const ScheduleDateTimePicker = () => 
   (
@@ -24,9 +24,9 @@ export const useScheduleDateTimePicker = () => {
             }}
           />}
         label="Starting DateTime:"
-        value={value}
+        value={startDateValue}
         onChange={(newValue) => { setValue(newValue); }} />
     </LocalizationProvider>
   )
-	return {ScheduleDateTimePicker,value}
+	return {ScheduleDateTimePicker,startDateValue}
 }

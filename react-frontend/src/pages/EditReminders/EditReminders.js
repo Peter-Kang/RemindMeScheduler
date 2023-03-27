@@ -1,21 +1,26 @@
-import React from "react";
+import {React, useState} from "react";
 import '../../assets/EditReminders.css';
+import { Link } from "react-router-dom";
 //bootstrap
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 //Date picker
 import { useScheduleDateTimePicker } from "./useDatePicker";
+//Message inputs
+ 
 import { useTodos } from "../../hooks/useTodos";
-import { Link } from "react-router-dom";
+
 
 const EditReminders = () =>
 {
     const {todos, createTodo} = useTodos()
-    const {ScheduleDateTimePicker, value} = useScheduleDateTimePicker()
+    const {ScheduleDateTimePicker, startDateValue} = useScheduleDateTimePicker()
+    const [messageValueInput, updateMessageValueInput ] = useState('')
+    const [frequencyValueInputInt, updateFrequencyValueInputInt ] = useState('0')
 
     return (
         <Container>
-            <Button onClick={() => createTodo({value})}>Create Todo</Button>
+            <Button onClick={() => createTodo({startDateValue,messageValueInput, frequencyValueInputInt})}>Create Todo</Button>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
@@ -25,8 +30,20 @@ const EditReminders = () =>
             <br/>
             <h2><font color='white'>Add</font></h2>
             <Row md={12}className="d-flex align-items-center">
-                <Col col-sm><font color='white'>Message: </font><input></input></Col>
-                <Col col-sm><font color='white'>Frequency in hours: </font><input></input></Col>
+                <Col col-sm>
+                    <font color='white'>
+                        Message: {messageValueInput}
+                    </font>
+                    <input type="text" id="messageInputValueText" name="messageInputValueText" onChange={e=>updateMessageValueInput(e.target.value)} value={messageValueInput}>
+                    </input>
+                </Col>
+                <Col col-sm>
+                    <font color='white'>
+                        Frequency in hours: 
+                    </font>
+                    <input type="text" id="updateFrequencyValueInputInt" name="updateFrequencyValueInputInt" onChange={e=>updateFrequencyValueInputInt(e.target.value)} value={frequencyValueInputInt}>
+                    </input>
+                </Col>
                 <Col col-sm>
                     <ScheduleDateTimePicker />
                 </Col>
