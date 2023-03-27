@@ -7,7 +7,7 @@ export {
   MongoClient,
   Bson,
   ObjectId,
-} from 'https://deno.land/x/mongo@v0.30.1/mod.ts'; //todo update to latest
+} from 'https://deno.land/x/mongo@v0.30.1/mod.ts'; //Planned update to latest
 
 //Webserver.ts uses this
 export { oakCors } from 'https://deno.land/x/cors/mod.ts';
