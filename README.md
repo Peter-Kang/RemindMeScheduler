@@ -1,6 +1,10 @@
 # ScheduleTimer
 Reminder App
 
+Prerequisite:
+yarn
+Docker
+
 # Starting
 ```
 yarn run start
