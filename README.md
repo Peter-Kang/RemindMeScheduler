@@ -1,9 +1,9 @@
 # ScheduleTimer
 Reminder App
 
-Prerequisite:
-yarn
-Docker
+# Prerequisite
+yarn - package manager
+Docker - container platform
 
 # Starting
 ```
