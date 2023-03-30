@@ -11,8 +11,7 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 export const useScheduleDateTimePicker = () => {
 	const [startDateValue, setValue] = React.useState(dayjs('2022-04-17T15:30'));
 
-	const ScheduleDateTimePicker = () => 
-  (
+	const ScheduleDateTimePicker = () => (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MobileDateTimePicker
         renderInput={(props) => 
