@@ -7,6 +7,7 @@ app.use(oakCors());
 
 app.use(async (requestEvent) => {
     const result = requestEvent.request.body(); 
+    console.log(result);
     //requestEvent.response.body = await result.value;
     let body = '';
     body = `Alive!! Your user-agent is:\n\n${

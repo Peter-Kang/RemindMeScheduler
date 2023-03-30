@@ -29,3 +29,17 @@
 .Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
     border-color: white;
 }
+.MuiPaper-root.MuiDialog-paper {
+    background-color: #282c34;
+    color: white;
+}
+.MuiTypography-root{
+    color: white !important;
+}
+hr{
+    background-color: white;
+    border-color: white;
+    color:white;
+    border-style:solid;
+    height: 2px;
+}

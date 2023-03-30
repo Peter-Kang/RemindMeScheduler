@@ -1,21 +1,28 @@
-import React from "react";
+import {React, useState} from "react";
 import '../../assets/EditReminders.css';
+import { Link } from "react-router-dom";
 //bootstrap
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-//mui
-import dayjs from 'dayjs';
-import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { Link } from "react-router-dom";
+//Date picker
+import { useScheduleDateTimePicker } from "./useDatePicker";
+//Message inputs
+ 
+import { useTodos } from "../../hooks/useTodos";
 
-const EditReminders = ()=>
+
+const EditReminders = () =>
 {
-    const [value, setValue] = React.useState(dayjs('2022-04-07'));
+    const {todos, createTodo} = useTodos()
+    const {ScheduleDateTimePicker, startDateValue} = useScheduleDateTimePicker()
+    const [messageValueInput, updateMessageValueInput ] = useState('')
+    const isValid = messageValueInput.length > 0;
+    const [frequencyValueInputInt, updateFrequencyValueInputInt ] = useState('0')
+    console.log({isValid});
+
     return (
         <Container>
+            <Button onClick={() => createTodo({startDateValue,messageValueInput, frequencyValueInputInt})}>Create Todo</Button>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
@@ -25,35 +32,36 @@ const EditReminders = ()=>
             <br/>
             <h2><font color='white'>Add</font></h2>
             <Row md={12}className="d-flex align-items-center">
-                <Col col-sm><font color='white'>Message: </font><input></input></Col>
-                <Col col-sm><font color='white'>Frequency in hours: </font><input></input></Col>
-                <Col col-sm>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateTimePicker
-                          renderInput={(props) => 
-                            <TextField {...props} 
-                                className="createStartDatePicker"
-                                sx={{svg: { color: 'white' },
-                                    input: { color: 'white' }
-                                }} 
-                            />}
-                          label="Starting DateTime:"
-                          value={value}
-                          onChange={(newValue) => {setValue(newValue);}}/>
-                    </LocalizationProvider>
+                <Col sm={4}>
+                    <font color='white'>
+                        Message:
+                    </font>
+                    <input type="text" id="messageInputValueText" name="messageInputValueText" onChange={e=>updateMessageValueInput(e.target.value)} value={messageValueInput}>
+                    </input>
                 </Col>
-                <Col col-sm>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
+                <Col sm={4}>
+                    <font color='white'>
+                        Frequency in hours: 
+                    </font>
+                    <input type="number" min={0} id="updateFrequencyValueInputInt" name="updateFrequencyValueInputInt" onChange={e=>updateFrequencyValueInputInt(e.target.value)} value={frequencyValueInputInt}>
+                    </input>
+                </Col>
+                <Col sm={3}>
+                    <ScheduleDateTimePicker />
+                </Col>
+                <Col sm={1}>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
             </Row>
             <br/>
+            <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
             <Row md={12}className="d-flex align-items-center">
-                <Col col-sm><font color='white'>ID</font></Col>
-                <Col col-sm><font color='white'>Message</font></Col>
-                <Col col-sm><font color='white'>Frequency</font></Col>
-                <Col col-sm><font color='white'>Start DateTime</font></Col>
-                <Col col-sm><font color='white'>Update</font></Col>
-                <Col col-sm><font color='white'>Remove</font></Col>
+                <Col sm={1}><font color='white'>ID</font></Col>
+                <Col sm={4}><font color='white'>Message</font></Col>
+                <Col sm={1}><font color='white'>Frequency</font></Col>
+                <Col sm={4}><font color='white'>Start DateTime</font></Col>
+                <Col sm={1}><font color='white'>Update</font></Col>
+                <Col sm={1}><font color='white'>Remove</font></Col>
             </Row>
         </Container>
     );
