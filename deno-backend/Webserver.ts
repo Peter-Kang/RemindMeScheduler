@@ -5,23 +5,32 @@ const router = new Router();
 
 app.use(oakCors());
 
-app.use(async (requestEvent) => {
-    const result = requestEvent.request.body(); 
-    console.log(result);
-    //requestEvent.response.body = await result.value;
+app.use(async (ctx) => {
+    //ctx.response.body = await result.value;
     let body = '';
     body = `Alive!! Your user-agent is:\n\n${
-      requestEvent.request.headers.get("user-agent") ?? "Unknown"
+      ctx.request.headers.get("user-agent") ?? "Unknown"
     }`;
-    if( requestEvent.request.method === 'GET' )
-    {
-      const url = new URL(requestEvent.request.url, `http://${requestEvent.request.headers.get('host')}`);
-      if( url.pathname === '/HealthCheck' )
-      {
-        body = 'Alive!';
-      }
+    const requestMethod = ctx.request.method;
+    const url = new URL(ctx.request.url, `http://${ctx.request.headers.get('host')}`);
+    switch (requestMethod){
+      case "GET":
+        if( url.pathname === '/HealthCheck' )
+        {
+          body = 'Alive!';
+        }
+        break;
+      case "POST":
+        if( url.pathname === '/CreateToDo' )
+        {
+          const jsonResultValue = await ctx.request.body({ type: "json" }).value;
+          console.log(jsonResultValue);
+        }
+        break;
+      default:
+        break;
     }
-    requestEvent.response.body = await body;
+    ctx.response.body = await body;
   });
 
 app.use(router.routes());
