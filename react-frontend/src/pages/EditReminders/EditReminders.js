@@ -17,11 +17,10 @@ const EditReminders = () =>
     const [messageValueInput, updateMessageValueInput ] = useState('')
     const isValid = messageValueInput.length > 0;
     const [frequencyValueInputInt, updateFrequencyValueInputInt ] = useState('0')
-    console.log({isValid});
 
     return (
         <Container>
-            <Button onClick={() => createTodo({startDateValue,messageValueInput, frequencyValueInputInt})}>Create Todo</Button>
+           
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">
@@ -48,7 +47,7 @@ const EditReminders = () =>
                 <Col sm={3}>
                     <ScheduleDateTimePicker />
                 </Col>
-                <Col sm={1}>  <Button variant="btn btn-secondary" href={"/"} >Add</Button> </Col>
+                <Col sm={1}> <Button onClick={() => createTodo({startDateValue,messageValueInput, frequencyValueInputInt})}>Add</Button> </Col>
             </Row>
             <br/>
             <hr/>
