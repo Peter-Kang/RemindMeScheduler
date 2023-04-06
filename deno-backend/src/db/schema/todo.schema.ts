@@ -1,15 +1,15 @@
-import { z } from '../deps.ts';
+import { z } from '../../../deps.ts';
 
-export const createTodoSchema = z.object({
+export const createToDoSchema = z.object({
   body: z.object({
-    title: z.string({
-      required_error: 'Title is required',
+    message: z.string({
+      required_error: 'Message is required',
     }),
-    content: z.string({
-      required_error: 'Content is required',
+    frequencyInHours: z.string({
+      required_error: 'Frequency In Hours is required',
     }),
-    status: z.string({
-      required_error: 'Status is required',
+    startDateTime: z.string({
+      required_error: 'StartDate is required',
     }),
   }),
 });
@@ -20,26 +20,26 @@ const params = {
   }),
 };
 
-export const getTodoSchema = z.object({
+export const getToDoSchema = z.object({
   ...params,
 });
 
-export const updateTodoSchema = z.object({
+export const updateToDoSchema = z.object({
   ...params,
   body: z
     .object({
-      title: z.string(),
-      content: z.string(),
-      status: z.string(),
+      message: z.string(),
+      frequencyInHours: z.string(),
+      startDateTime: z.string(),
     })
     .partial(),
 });
 
-export const deleteTodoSchema = z.object({
+export const deleteToDoSchema = z.object({
   ...params,
 });
 
-export type CreateTodoInput = z.TypeOf<typeof createTodoSchema>['body'];
-export type GetTodoInput = z.TypeOf<typeof getTodoSchema>['params'];
-export type UpdateTodoInput = z.TypeOf<typeof updateTodoSchema>;
-export type DeleteTodoInput = z.TypeOf<typeof deleteTodoSchema>['params'];
+export type CreateTodoInput = z.TypeOf<typeof createToDoSchema>['body'];
+export type GetTodoInput = z.TypeOf<typeof getToDoSchema>['params'];
+export type UpdateTodoInput = z.TypeOf<typeof updateToDoSchema>;
+export type DeleteTodoInput = z.TypeOf<typeof deleteToDoSchema>['params'];

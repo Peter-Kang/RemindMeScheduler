@@ -1,11 +1,11 @@
-import { db } from '../connectDB.ts';
-import { ObjectId } from '../../deps.ts';
+import { db } from '../../utils/connectDB.ts';
+import { ObjectId } from '../../../deps.ts';
 
 export interface TodoSchema {
   _id?: ObjectId;
-  title: string;
-  content: string;
-  status: string;
+  message: string;
+  startDateTime: Date;
+  frequencyInHours: integer;
   createdAt: Date;
   updatedAt: Date;
 }

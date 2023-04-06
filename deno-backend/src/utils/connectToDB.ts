@@ -1,5 +1,5 @@
 import { MongoClient } from '../deps.ts';
-import config from '../config/default.ts';
+import config from '../../config/default.ts';
 
 const {dbUri, dbName} = config
 
