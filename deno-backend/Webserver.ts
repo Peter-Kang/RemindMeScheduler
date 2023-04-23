@@ -1,5 +1,5 @@
-import { Application,oakCors,Router, mongo } from './deps.ts';
-import config from './config/default'
+import { Application,oakCors,Router } from './deps.ts';
+import config from './config/default.ts'
 
 const app = new Application();
 const router = new Router(); //Create the new router
