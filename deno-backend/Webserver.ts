@@ -1,8 +1,10 @@
 import { Application,oakCors,Router } from './deps.ts';
 import config from './config/default.ts'
+import appRouter from './src/routes/index.ts';
 
 const app = new Application();
 const router = new Router(); //Create the new router
+
 
 app.use(oakCors());
 
@@ -54,6 +56,8 @@ app.use(async (ctx) => {
 });
 */
 
+//evoke routers
+appRouter.init(app)
 app.use(router.routes()); // Implement our router
 app.use(router.allowedMethods()); // Allow router HTTP methods
 
