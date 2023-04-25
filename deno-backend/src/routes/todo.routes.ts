@@ -1,7 +1,7 @@
-import { Router } from deps.ts
+import { Router } from '../../deps.ts'
 import todoController from '../controllers/todo.controller.ts';
-import { createTodoSchema, updateTodoSchema } from '../db/schema/todo.schema.ts'
-import validate from "../middleware/validate.ts"
+import { createToDoSchema, updateToDoSchema } from '../db/schema/todo.schema.ts'
+import validate from '../middleware/validate.ts'
 
 
 const router = new Router();
@@ -9,12 +9,12 @@ const router = new Router();
 router.get<string>('/', todoController.findAllTodosController);
 router.post<string>(
   '/',
-  validate(createTodoSchema),
+  validate(createToDoSchema),
   todoController.createTodoController
 );
 router.patch<string>(
   '/:todoId',
-  validate(updateTodoSchema),
+  validate(updateToDoSchema),
   todoController.updateTodoController
 );
 router.get<string>('/:todoId', todoController.findTodoController);
