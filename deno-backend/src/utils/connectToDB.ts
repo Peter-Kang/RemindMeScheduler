@@ -1,10 +1,8 @@
-import { MongoClient } from '../deps.ts';
+import { MongoClient } from '../../deps.ts';
 import config from '../../config/default.ts';
 
-const {dbUri, dbName} = config
-
 const client: MongoClient = new MongoClient();
-await client.connect(dbUri);
-console.log('? Connected to MongoDB Successfully');
 
-export const db = client.database(dbName);
+const db = await client.connect('mongodb://admin:password123@mongo:6000/deno_mongodb');
+
+export { db };
