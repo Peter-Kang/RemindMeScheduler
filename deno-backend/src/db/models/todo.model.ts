@@ -1,11 +1,12 @@
-import { db } from '../../utils/connectDB.ts';
+import { db } from '../../utils/connectToDB.ts';
 import { ObjectId } from '../../../deps.ts';
+import { Int32 } from 'https://deno.land/x/web_bson@v0.2.3/mod.ts';
 
 export interface TodoSchema {
   _id?: ObjectId;
   message: string;
   startDateTime: Date;
-  frequencyInHours: integer;
+  frequencyInHours: Int32;
   createdAt: Date;
   updatedAt: Date;
 }
