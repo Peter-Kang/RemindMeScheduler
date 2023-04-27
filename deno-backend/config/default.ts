@@ -6,7 +6,7 @@ const config: {
   dbUri: string;
   dbName: string;
 } = {
-  port: parseInt(Deno.env.get('MONGO_EXTERNAL_PORT') as unknown as string),
+  port: parseInt(Deno.env.get('DENO_PORT') as unknown as string),
   dbUri: Deno.env.get('MONGODB_URI') as unknown as string,
   dbName: Deno.env.get('MONGODB_DATABASE_NAME') as unknown as string,
 };

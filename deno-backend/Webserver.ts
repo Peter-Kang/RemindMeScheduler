@@ -61,12 +61,11 @@ appRouter.init(app)
 app.use(router.routes()); // Implement our router
 app.use(router.allowedMethods()); // Allow router HTTP methods
 
+const port = config.port;
 app.addEventListener('listen', ({ port, secure }) => {
   console.log(
     `? Server started on ${secure ? 'https://' : 'http://'}localhost:${port}`
   );
 });
-
-const port = config.port;
-await app.listen({ port });
 console.log(`HTTP webserver running.  Access it at:  http://localhost:8000/`);
+await app.listen({ port });
