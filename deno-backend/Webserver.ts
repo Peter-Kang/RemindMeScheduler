@@ -1,5 +1,4 @@
 import { Application,oakCors,Router, RouterContext } from './deps.ts';
-import config from './config/default.ts'
 import appRouter from './src/routes/index.ts';
 
 const app = new Application();
