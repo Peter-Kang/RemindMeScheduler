@@ -1,5 +1,5 @@
 version: '0'
-name: 'React-Deno-mongodb'
+name: 'react-deno-mongo'
 services:
   react:
     build:
@@ -25,7 +25,7 @@ services:
     volumes: 
       - ./deno-backend:/app
     ports:
-      - "8000:8000"
+      - '8000:8000'
     environment:
       - PORT=8000
     expose:

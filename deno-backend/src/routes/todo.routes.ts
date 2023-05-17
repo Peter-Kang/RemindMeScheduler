@@ -6,9 +6,9 @@ import validate from '../middleware/validate.ts'
 
 const router = new Router();
 
-router.get<string>('/', todoController.findAllTodosController);
+router.get<string>('/GetAllToDo', todoController.findAllTodosController);
 router.post<string>(
-  '/',
+  '/CreateToDo',
   validate(createToDoSchema),
   todoController.createTodoController
 );

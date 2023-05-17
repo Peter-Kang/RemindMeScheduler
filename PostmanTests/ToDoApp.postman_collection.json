@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "b964bc5c-b985-4d84-b1fe-8a1a53075283",
+		"name": "ToDoApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25679242"
+	},
+	"item": [
+		{
+			"name": "HealthCheck",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true,
+					"host": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/HealthCheck",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"HealthCheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"Message Firsters1\",\r\n    \"content\": \"My content haha My content haha\",\r\n    \"startDateTime\": \"2012-08-08 21:46:24.862000\",\r\n    \"frequencyInHours\":\"12\",\r\n    \"status\": \"uncompleted\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/ToDo/CreateToDo",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"ToDo",
+						"CreateToDo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllTodosController",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/ToDo/GetAllToDo",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"ToDo",
+						"GetAllToDo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/ToDo/6455b1d37e7cb5960aaa0b33",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"ToDo",
+						"6455b1d37e7cb5960aaa0b33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update  Todo",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"Updated My first 1 demo post always\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/ToDo/6455b1d37e7cb5960aaa0b33",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"ToDo",
+						"6455b1d37e7cb5960aaa0b33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete  Todo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/ToDo/6455b30e7e7cb5960aaa0b34",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"ToDo",
+						"6455b30e7e7cb5960aaa0b34"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

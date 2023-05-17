@@ -1,5 +1,4 @@
 import { Application,oakCors,Router, RouterContext } from './deps.ts';
-import config from './config/default.ts'
 import appRouter from './src/routes/index.ts';
 
 const app = new Application();
@@ -61,11 +60,5 @@ appRouter.init(app)
 app.use(router.routes()); // Implement our router
 app.use(router.allowedMethods()); // Allow router HTTP methods
 
-const port = config.port;
-app.addEventListener('listen', ({ port, secure }) => {
-  console.log(
-    `? Server started on ${secure ? 'https://' : 'http://'}localhost:${port}`
-  );
-});
-console.log(`HTTP webserver running.  Access it at:  http://localhost:8000/`);
+const port = 8000;
 await app.listen({ port });
