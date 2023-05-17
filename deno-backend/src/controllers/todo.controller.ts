@@ -171,8 +171,8 @@ const deleteTodoController = async ({
     const numberOfTodo = await Todo.deleteOne({
       _id: new Bson.ObjectId(params.todoId),
     });
-
-    if (!numberOfTodo) {
+    console.log(numberOfTodo);
+    if (numberOfTodo !== 0) {
       response.status = 404;
       response.body = {
         status: 'success',
