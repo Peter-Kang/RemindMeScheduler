@@ -7,6 +7,7 @@ export interface TodoSchema {
   message: string;
   startDateTime: Date;
   frequencyInHours: Int32;
+  status: string;
   createdAt: Date;
   updatedAt: Date;
 }

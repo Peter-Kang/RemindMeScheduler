@@ -12,7 +12,7 @@ const createTodoController = async ({
   response,
 }: RouterContext<string>) => {
   try {
-    const { message, startDatetime, freq, status }: CreateTodoInput =
+    const { message, startDateTime, frequencyInHours, status }: CreateTodoInput =
       await request.body().value;
     const totoExists = await Todo.findOne({ message });
     if (totoExists) {
@@ -29,8 +29,8 @@ const createTodoController = async ({
 
     const todoId: string | Bson.ObjectId = await Todo.insertOne({
       message,
-      startDatetime,
-      freq,
+      startDateTime,
+      frequencyInHours,
       status,
       createdAt,
       updatedAt,
