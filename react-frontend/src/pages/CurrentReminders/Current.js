@@ -12,7 +12,7 @@ const Current = () =>
     return (
         <Container>
             <Button onClick={retrigger}>Refresh</Button>
-            <span><font color ='white'>{' '}{isAlive}</font></span>
+            <span><font color ='white'>{' '}{isAlive.message}</font></span>
             <br/>
             <Row className="d-flex align-items-center">
                 <Col md={12} className="d-flex justify-content-end">

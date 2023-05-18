@@ -7,7 +7,7 @@ const fakeTodoDB = [{id: 0, message: 'Fake ToDo', startDateTime: '01/05/2023'}]
 //promises are like tasks in c#
 export const createToDoAPICall = async (params) => {
 	console.log('createTodoAPICall');
-	const { data } = await API.post('/CreateToDo',
+	const { data } = await API.post('/ToDo/CreateToDo',
 		params);
 	console.log(data);
 	return data;
@@ -15,7 +15,7 @@ export const createToDoAPICall = async (params) => {
 
 export const fetchToDoAPICall = async (params) => {
 	console.log('fetchToDoAPICall');
-	const {data} = await API.get('/GetAllToDo');
+	const {data} = await API.get('/ToDo/GetAllToDo');
 	console.log(data);
 	return data;
 }
@@ -36,7 +36,7 @@ export const useTodos = () => {
 	const createTodo = async (newTodoData) => {
 		console.log('make network request', newTodoData)
 		// should actually be a network request to add new todo, is push for fake purposes
-		fakeTodoDB.push({id: 1, message: 'Fake Todo 2', startDateTime: '03/24/2023' })
+		//fakeTodoDB.push({id: 1, message: 'Fake Todo 2', startDateTime: '03/24/2023' })
 		await createToDoAPICall(newTodoData);
 		const newTodos = await fetchToDoAPICall()
 		setTodos(newTodos)
