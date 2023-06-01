@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import API from '../utils/api.js'
 
-const fakeTodoDB = [{id: 0, message: 'Fake ToDo', startDateTime: '01/05/2023'}]
 
 //api calls
 //promises are like tasks in c#
@@ -13,16 +12,12 @@ export const createToDoAPICall = async (params) => {
 		"startDateTime":String(params.startDateValue),
 		"frequencyInHours":String(params.frequencyValueInputInt),
 		"status":"uncompleted" };
-	console.log(filteredParams);
 	const { data } = await API.post('/ToDo/CreateToDo',filteredParams);
-	console.log(data);
 	return data;
 };
 
 export const fetchToDoAPICall = async (params) => {
-	console.log('fetchToDoAPICall');
 	const {data} = await API.get('/ToDo/GetAllToDo');
-	console.log(data);
 	return data;
 }
 

@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react';
 
 //mui
-import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
+export interface ScheduleDateTimePickerProps { 
+  startingDate: Date,
+  setStartingDate: (newValue:Date|null)=> void
+ }
 
-export const useScheduleDateTimePicker = () => {
-	const [startDateValue, setValue] = React.useState(dayjs('2022-04-17T15:30'));
-
-	const ScheduleDateTimePicker = () => (
+export const ScheduleDateTimePicker:React.FC<ScheduleDateTimePickerProps> = ({startingDate,setStartingDate}) => {
+  return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MobileDateTimePicker
         renderInput={(props) => 
@@ -23,9 +24,8 @@ export const useScheduleDateTimePicker = () => {
             }}
           />}
         label="Starting DateTime:"
-        value={startDateValue}
-        onChange={(newValue) => { setValue(newValue); }} />
+        value={startingDate}
+        onChange={(newValue) => {setStartingDate(newValue); }} />
     </LocalizationProvider>
   )
-	return {ScheduleDateTimePicker,startDateValue}
 }
