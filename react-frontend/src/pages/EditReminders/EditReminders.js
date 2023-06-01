@@ -5,19 +5,14 @@ import { Link } from "react-router-dom";
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 //Date picker
-import { ScheduleDateTimePicker } from "./useDatePicker.tsx";
+import { ScheduleDateTimePicker } from "./EditDatePicker.tsx";
 //Message inputs
 import { useTodos } from "../../hooks/useTodos";
-
-function createRow(todos)
-{
-    
-}
 
 const EditReminders = () =>
 {
     const {todos, createTodo} = useTodos()
-    const {startingDateValue, setStartingDateValue} = useState(new Date())
+    const [startingDateValue, setStartingDateValue] = useState(new Date())
     const [messageValueInput, updateMessageValueInput ] = useState('')
     const isValid = messageValueInput.length > 0;
     const [frequencyValueInputInt, updateFrequencyValueInputInt ] = useState('0')
@@ -48,9 +43,11 @@ const EditReminders = () =>
                     </input>
                 </Col>
                 <Col sm={3}>
-                    <ScheduleDateTimePicker startDateValue={startingDateValue} setStartingDateValue={setStartingDateValue}/>
+                    <ScheduleDateTimePicker startingDate={startingDateValue} setStartingDate={setStartingDateValue}/>
                 </Col>
-                <Col sm={1}> <Button onClick={() => createTodo({startDateValue,messageValueInput, frequencyValueInputInt})}>Add</Button> </Col>
+                <Col sm={1}> 
+                    <Button onClick={() => createTodo({startDateValue,messageValueInput, frequencyValueInputInt})}>Add</Button>
+                </Col>
             </Row>
             <br/>
             <hr/>
