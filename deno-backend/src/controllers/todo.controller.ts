@@ -1,3 +1,4 @@
+import { Int32 } from 'https://deno.land/x/web_bson@v0.2.3/mod.ts';
 import type { RouterContext } from '../../deps.ts';
 import { Bson } from '../../deps.ts';
 import { Todo } from '../db/models/todo.model.ts';
@@ -12,8 +13,10 @@ const createTodoController = async ({
   response,
 }: RouterContext<string>) => {
   try {
-    const { message, startDateTime, frequencyInHours, status }: CreateTodoInput =
+    //wait for a value
+    const { message, startDateTime, frequencyInHours }: CreateTodoInput =
       await request.body().value;
+    //validation
     const totoExists = await Todo.findOne({ message });
     if (totoExists) {
       response.status = 409;
@@ -24,13 +27,17 @@ const createTodoController = async ({
       return;
     }
 
+    //prepare parameters
     const createdAt = new Date();
     const updatedAt = createdAt;
-
+    const startDateTimeDate = new Date(startDateTime);
+    const frequencyInHoursInt32 = new Int32(frequencyInHours);
+    const status = "incomplete";
+//add it
     const todoId: string | Bson.ObjectId = await Todo.insertOne({
       message,
-      startDateTime,
-      frequencyInHours,
+      startDateTime:startDateTimeDate,
+      frequencyInHours:frequencyInHoursInt32,
       status,
       createdAt,
       updatedAt,
@@ -42,8 +49,8 @@ const createTodoController = async ({
       return;
     }
 
+    //check if it is created
     const todo = await Todo.findOne({_id: todoId})
-
     response.status = 201;
     response.body = {
       status: 'success',
