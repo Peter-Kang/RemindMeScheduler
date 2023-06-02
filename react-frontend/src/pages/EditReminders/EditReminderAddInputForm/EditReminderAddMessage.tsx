@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Assets/Message.css"
 
 export interface EditReminderAddMessageProp{
     message:string,
@@ -8,7 +9,7 @@ export interface EditReminderAddMessageProp{
 export const EditReminderAddMessage:React.FC<EditReminderAddMessageProp> = ({ message, setMessageCallback }) => {
     return (
         <div>
-            <p color='white'>
+            <p id="EditReminderAddMessageLabel">
                 Message:
             </p>
             <input type="text" id="messageInputValueText" name="messageInputValueText" 
