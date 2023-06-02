@@ -10,8 +10,7 @@ export const createToDoAPICall = async (params) => {
 	const filteredParams = { "message": params.messageValueInput,
 		"context":"ToDo",
 		"startDateTime":String(params.startDateValue),
-		"frequencyInHours":String(params.frequencyValueInputInt),
-		"status":"uncompleted" };
+		"frequencyInHours":String(params.frequencyValueInputInt) };
 	const { data } = await API.post('/ToDo/CreateToDo',filteredParams);
 	return data;
 };

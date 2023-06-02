@@ -8,7 +8,7 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 
 export interface ScheduleDateTimePickerProps { 
   startingDate: Date,
-  setStartingDate: (newValue:Date|null)=> void
+  setStartingDate: (newValue:Date)=> void
  }
 
 export const ScheduleDateTimePicker:React.FC<ScheduleDateTimePickerProps> = ({startingDate,setStartingDate}) => {
@@ -25,7 +25,11 @@ export const ScheduleDateTimePicker:React.FC<ScheduleDateTimePickerProps> = ({st
           />}
         label="Starting DateTime:"
         value={startingDate}
-        onChange={(newValue) => {setStartingDate(newValue); }} />
+        onChange={(newValue) => { 
+          const newValueValidated = newValue == null ? new Date() : newValue; 
+          setStartingDate(newValueValidated); 
+          }
+        } />
     </LocalizationProvider>
   )
 }

@@ -6,6 +6,7 @@
   "author": "Peter Kang <pxk7062@rit.edu>",
   "license": "MIT",
   "scripts": {
+    "tsc": "tsc",
     "start": "docker-compose up -d --build",
     "stop": "docker-compose down && docker system prune -a -f",
     "restart": "yarn stop && yarn start"
