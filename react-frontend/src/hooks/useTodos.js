@@ -27,8 +27,10 @@ export const useTodos = () => {
 	useEffect(() => {
 		// async function to fetch todos
 		const getAndUpdateToDos = async () => {
-			const todoResponse = await fetchToDoAPICall()
-			setTodos(todoResponse)
+			const todoResponse = await fetchToDoAPICall();
+			setTodos(todoResponse);
+			console.log(todoResponse);
+			console.log(todos);
 		}
 		getAndUpdateToDos()
 	}, [])

@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import {EditReminderAddInputForm} from "../EditReminders/EditReminderAddInputForm/EditReminderAddInputForm.tsx"
 
+//Rows/EDIT
+import {EditReminderRowEditInputForm} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm.tsx"
+
 import { useTodos } from "../../hooks/useTodos.js";
 
 const EditReminders = () =>
@@ -33,6 +36,7 @@ const EditReminders = () =>
                 <Col sm={1}><font color='white'>Update</font></Col>
                 <Col sm={1}><font color='white'>Remove</font></Col>
             </Row>
+            
         </Container>
     );
 }
