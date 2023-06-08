@@ -30,15 +30,14 @@ export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormP
                 </Row>
                 <hr/>
                 {arrayOfReminderInstances.map((Instance:ReminderInstance) => 
-
-                <Row key={Instance._id}>
-                        <Col sm={3}><p>{Instance._id}</p></Col>
-                        <Col sm={4}><p>{Instance.message}</p></Col>
-                        <Col sm={1}><p>{Instance.frequencyInHours}</p></Col>
-                        <Col sm={2}><p>{Instance.startDateTime.toString()}</p></Col>
-                        <Col sm={1}><Link to="/" className="btn btn-outline-success">Update</Link></Col>
-                        <Col sm={1}><Link to="/" className="btn btn-outline-danger">Remove</Link></Col>
-                </Row>
+                    <Row key={Instance._id}>
+                            <Col sm={3}><p>{Instance._id}</p></Col>
+                            <Col sm={4}><p>{Instance.message}</p></Col>
+                            <Col sm={1}><p>{Instance.frequencyInHours}</p></Col>
+                            <Col sm={2}><p>{Instance.startDateTime.toString()}</p></Col>
+                            <Col sm={1}><Link to="/" className="btn btn-outline-success">Update</Link></Col>
+                            <Col sm={1}><Link to="/" className="btn btn-outline-danger">Remove</Link></Col>
+                    </Row>
                 )}
             </div>)
 }
