@@ -19,7 +19,7 @@ const useRequest = (initUrl) => {
       setLoading(false);
     };
     fetchResponse();
-    return (() => { ignore = true; });
+    return (() => { ignore = false; }); // this was ignore = true
   }, [initUrl]);
 
   return { data, loading, error };

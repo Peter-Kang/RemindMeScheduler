@@ -24,9 +24,11 @@ const EditReminders = () =>
         console.log(error)
         return 'error'
     }
-    if(data?.data)console.log(data.data.todos)
-
-    let reminderResultArray = JSON.parse(JSON.stringify(data?.data?.todos)) | []
+    let reminderResultArray =  []
+    if(data?.data?.todos)
+    {
+        reminderResultArray = data.data.todos
+    }
     return (
         <Container>
             <br/>
@@ -42,14 +44,7 @@ const EditReminders = () =>
             <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
-            <Row md={12}className="d-flex align-items-center">
-                <Col sm={1}><font color='white'>ID</font></Col>
-                <Col sm={4}><font color='white'>Message</font></Col>
-                <Col sm={1}><font color='white'>Frequency</font></Col>
-                <Col sm={4}><font color='white'>Start DateTime</font></Col>
-                <Col sm={1}><font color='white'>Update</font></Col>
-                <Col sm={1}><font color='white'>Remove</font></Col>
-            </Row>
+            
             <EditReminderRowEditInputForm arrayOfReminderInstances={reminderResultArray}/>
         </Container>
     );
