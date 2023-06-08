@@ -17,8 +17,6 @@ export interface EditReminderRowEditInputFormProp {
 
 export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormProp> = ({arrayOfReminderInstances}) => {
     return( <div>
-        {
-            arrayOfReminderInstances.map((Instance:ReminderInstance) => <Row><Col>{Instance.message} </Col></Row>)
-        }
+        {arrayOfReminderInstances.map((Instance:ReminderInstance) => <Row key={Instance._id}><Col>{Instance.message} </Col></Row>)}
         </div>)
 }

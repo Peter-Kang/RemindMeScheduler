@@ -3,16 +3,30 @@ import '../../assets/EditReminders.css';
 import { Link } from "react-router-dom";
 //bootstrap
 import {Container, Row, Col, Alert} from "react-bootstrap";
-import {EditReminderAddInputForm} from "../EditReminders/EditReminderAddInputForm/EditReminderAddInputForm.tsx"
+import {EditReminderAddInputForm} from "./EditReminderAddInputForm/EditReminderAddInputForm"
 
 //Rows/EDIT
-import {EditReminderRowEditInputForm} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm.tsx"
+import {EditReminderRowEditInputForm, ReminderInstance} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm"
 
-import { useTodos } from "../../hooks/useTodos.js";
+import { useTodos, useCreateTodos } from "../../hooks/useTodos.js";
 
 const EditReminders = () =>
 {
-    const {todos, createTodo} = useTodos();
+    const {data, loading, error } = useTodos();
+    const {createTodo} = useCreateTodos();
+
+    if(loading)
+    {
+        return 'loading'
+    }
+    if(error)
+    {
+        console.log(error)
+        return 'error'
+    }
+    if(data?.data)console.log(data.data.todos)
+
+    let reminderResultArray = JSON.parse(JSON.stringify(data?.data?.todos)) | []
     return (
         <Container>
             <br/>
@@ -36,7 +50,7 @@ const EditReminders = () =>
                 <Col sm={1}><font color='white'>Update</font></Col>
                 <Col sm={1}><font color='white'>Remove</font></Col>
             </Row>
-            
+            <EditReminderRowEditInputForm arrayOfReminderInstances={reminderResultArray}/>
         </Container>
     );
 }
