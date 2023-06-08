@@ -18,7 +18,6 @@ export interface EditReminderRowEditInputFormProp {
 };
 
 export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormProp> = ({arrayOfReminderInstances}) => {
-    console.log(arrayOfReminderInstances);
     return( <div>
                 <Row md={12}className="d-flex align-items-center">
                     <Col sm={3}><p id="EditIDLabel">ID</p></Col>
