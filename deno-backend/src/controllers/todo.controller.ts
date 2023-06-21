@@ -20,6 +20,7 @@ const createTodoController = async ({
     const totoExists = await Todo.findOne({ message });
     if (totoExists) {
       response.status = 409;
+      response.statusText = 'Create fail. Title already exists'
       response.body = {
         status: 'fail',
         message: 'Todo with that title already exists',
@@ -45,13 +46,14 @@ const createTodoController = async ({
 
     if (!todoId) {
       response.status = 500;
-      response.body = { status: 'error', message: 'Error creating user' };
+      response.body = { status: 'error', message: 'Error creating todo' };
       return;
     }
 
     //check if it is created
     const todo = await Todo.findOne({_id: todoId})
     response.status = 201;
+    response.statusText = 'Created'
     response.body = {
       status: 'success',
       data: { todo },
