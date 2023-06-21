@@ -3,16 +3,32 @@ import '../../assets/EditReminders.css';
 import { Link } from "react-router-dom";
 //bootstrap
 import {Container, Row, Col, Alert} from "react-bootstrap";
-import {EditReminderAddInputForm} from "../EditReminders/EditReminderAddInputForm/EditReminderAddInputForm.tsx"
+import {EditReminderAddInputForm} from "./EditReminderAddInputForm/EditReminderAddInputForm"
 
 //Rows/EDIT
-import {EditReminderRowEditInputForm} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm.tsx"
+import {EditReminderRowEditInputForm, ReminderInstance} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm"
 
-import { useTodos } from "../../hooks/useTodos.js";
+import { useTodos, useCreateTodos } from "../../hooks/useTodos.js";
 
 const EditReminders = () =>
 {
-    const {todos, createTodo} = useTodos();
+    const {data, loading, error } = useTodos();
+    const {createTodo} = useCreateTodos();
+
+    if(loading)
+    {
+        return 'loading'
+    }
+    if(error)
+    {
+        console.log(error)
+        return 'error'
+    }
+    let reminderResultArray =  []
+    if(data?.data?.todos)
+    {
+        reminderResultArray = data.data.todos
+    }
     return (
         <Container>
             <br/>
@@ -28,15 +44,8 @@ const EditReminders = () =>
             <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
-            <Row md={12}className="d-flex align-items-center">
-                <Col sm={1}><font color='white'>ID</font></Col>
-                <Col sm={4}><font color='white'>Message</font></Col>
-                <Col sm={1}><font color='white'>Frequency</font></Col>
-                <Col sm={4}><font color='white'>Start DateTime</font></Col>
-                <Col sm={1}><font color='white'>Update</font></Col>
-                <Col sm={1}><font color='white'>Remove</font></Col>
-            </Row>
             
+            <EditReminderRowEditInputForm arrayOfReminderInstances={reminderResultArray}/>
         </Container>
     );
 }
