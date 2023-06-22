@@ -21,21 +21,24 @@ export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormP
     return( <div>
                 <Row md={12}className="d-flex align-items-center">
                     <Col sm={3}><p id="EditIDLabel">ID</p></Col>
-                    <Col sm={4}><p id="EditMessageLabel">Message</p></Col>
+                    <Col sm={3}><p id="EditMessageLabel">Message</p></Col>
+                    <Col sm={2}><p id="EditStatusLabel">Status</p></Col>
                     <Col sm={1}><p id="EditFrequencyLabel">Frequency</p></Col>
                     <Col sm={2}><p id="EditStartDateTimeLabel">Start DateTime</p></Col>
-                    <Col sm={1}><p id="EditUpdateLabel">Update</p></Col>
-                    <Col sm={1}><p id="EditRemoveLabel">Remove</p></Col>
+                    <Col sm={1}><p id="EditButtonLabel">Action</p></Col>
                 </Row>
                 <hr/>
                 {arrayOfReminderInstances.map((Instance:ReminderInstance) => 
-                    <Row key={Instance._id}>
-                            <Col sm={3}><p>{Instance._id}</p></Col>
-                            <Col sm={4}><p>{Instance.message}</p></Col>
-                            <Col sm={1}><p>{Instance.frequencyInHours}</p></Col>
-                            <Col sm={2}><p>{Instance.startDateTime.toString()}</p></Col>
-                            <Col sm={1}><Link to="/" className="btn btn-outline-success">Update</Link></Col>
-                            <Col sm={1}><Link to="/" className="btn btn-outline-danger">Remove</Link></Col>
+
+                    <Row md={12} key={Instance._id}>
+                        <Col sm={3}><p>{Instance._id}</p></Col>
+                        <Col sm={3}><p>{Instance.message}</p></Col>
+                        <Col sm={2}><p>{Instance.status}</p></Col>
+                        <Col sm={1}><p>{Instance.frequencyInHours}</p></Col>
+                        <Col sm={2}><p>{Instance.startDateTime.toString()}</p></Col>
+                        <Col sm={1}><Link to="/" className="btn btn-outline-success">Update</Link>
+                            <Link to="/" className="btn btn-outline-danger">Remove</Link>
+                        </Col>
                     </Row>
                 )}
             </div>)
