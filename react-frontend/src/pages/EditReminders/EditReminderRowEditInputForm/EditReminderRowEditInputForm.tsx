@@ -1,17 +1,8 @@
 import React from 'react';
-import { Table, Row, Col} from "react-bootstrap";
+import { Row, Col} from "react-bootstrap";
 import './Assets/EditReminderRowEditInputForm.css'
 import { Link } from "react-router-dom";
-
-export interface  ReminderInstance {
-    _id: string;
-    message: string;
-    startDateTime: Date;
-    frequencyInHours: number;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-};
+import {ReminderInstance, EditReminderRowEdit} from './EditReminderRowInstance.tsx'
 
 export interface EditReminderRowEditInputFormProp {
     arrayOfReminderInstances: ReminderInstance[];
@@ -29,17 +20,7 @@ export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormP
                 </Row>
                 <hr/>
                 {arrayOfReminderInstances.map((Instance:ReminderInstance) => 
-
-                    <Row md={12} key={Instance._id}>
-                        <Col sm={3}><p>{Instance._id}</p></Col>
-                        <Col sm={3}><p>{Instance.message}</p></Col>
-                        <Col sm={2}><p>{Instance.status}</p></Col>
-                        <Col sm={1}><p>{Instance.frequencyInHours}</p></Col>
-                        <Col sm={2}><p>{Instance.startDateTime.toString()}</p></Col>
-                        <Col sm={1}><Link to="/" className="btn btn-outline-success">Update</Link>
-                            <Link to="/" className="btn btn-outline-danger">Remove</Link>
-                        </Col>
-                    </Row>
+                    <EditReminderRowEdit reminderInstances = { Instance } />
                 )}
             </div>)
 }
