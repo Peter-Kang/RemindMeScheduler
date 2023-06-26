@@ -1,8 +1,9 @@
 import React from 'react';
 import { Row, Col} from "react-bootstrap";
 import './Assets/EditReminderRowEditInputForm.css'
-import { Link } from "react-router-dom";
-import {ReminderInstance, EditReminderRowEdit} from './EditReminderRowInstance.tsx'
+
+import {ReminderInstance, EditReminderRowEdit} from './Components/EditReminderRowInstance.tsx'
+
 
 export interface EditReminderRowEditInputFormProp {
     arrayOfReminderInstances: ReminderInstance[];
@@ -20,7 +21,7 @@ export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormP
                 </Row>
                 <hr/>
                 {arrayOfReminderInstances.map((Instance:ReminderInstance) => 
-                    <EditReminderRowEdit reminderInstances = { Instance } />
+                    <EditReminderRowEdit reminderInstance = { Instance } />
                 )}
             </div>)
 }
