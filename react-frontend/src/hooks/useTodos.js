@@ -19,8 +19,8 @@ export const createToDoAPICall = async (params) => {
 export const useCreateTodos = () => {
 	const createTodo = async (newTodoData) => {
 		await createToDoAPICall(newTodoData);
-		const newTodos = await fetchToDoAPICall()
-		setTodos(newTodos)
+		const newTodos = await useTodos()
+		return newTodos;
 	}
 	return createTodo;
 }
