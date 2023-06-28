@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "./Assets/Frequency.css"
+import "../Assets/Frequency.css"
 
 export interface EditReminderAddFrequencyProp{
     frequency:number,

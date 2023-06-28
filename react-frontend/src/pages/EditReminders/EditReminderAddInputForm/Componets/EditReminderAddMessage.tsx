@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Assets/Message.css"
+import "../Assets/Message.css"
 
 export interface EditReminderAddMessageProp{
     message:string,

@@ -13,7 +13,7 @@ import { useTodos, useCreateTodos } from "../../hooks/useTodos.js";
 const EditReminders = () =>
 {
     const {data, loading, error } = useTodos();
-    const {createTodo} = useCreateTodos();
+    const createTodo = useCreateTodos();
 
     if(loading)
     {
@@ -29,6 +29,7 @@ const EditReminders = () =>
     {
         reminderResultArray = data.data.todos
     }
+
     return (
         <Container>
             <br/>

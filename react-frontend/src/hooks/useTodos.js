@@ -6,11 +6,11 @@ import useRequest from "./useRequest.js";
 //promises are like tasks in c#
 export const createToDoAPICall = async (params) => {
 	console.log('createTodoAPICall');
-	console.log(params);
 	const filteredParams = { "message": params.messageValueInput,
 		"context":"ToDo",
-		"startDateTime":String(params.startDateValue),
+		"startDateTime":String(params.startingDateValue),
 		"frequencyInHours":String(params.frequencyValueInputInt) };
+	console.log(filteredParams);
 	const { data } = await API.post('/ToDo/CreateToDo',filteredParams);
 	return data;
 };

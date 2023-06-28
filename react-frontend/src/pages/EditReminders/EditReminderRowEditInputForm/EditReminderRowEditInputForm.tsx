@@ -20,8 +20,6 @@ export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormP
                     <Col sm={1}><p id="EditButtonLabel">Action</p></Col>
                 </Row>
                 <hr/>
-                {arrayOfReminderInstances.map((Instance:ReminderInstance) => 
-                    <EditReminderRowEdit reminderInstance = { Instance } />
-                )}
+                {arrayOfReminderInstances.map((Instance:ReminderInstance) => <EditReminderRowEdit reminderInstance = { Instance } />)}
             </div>)
 }

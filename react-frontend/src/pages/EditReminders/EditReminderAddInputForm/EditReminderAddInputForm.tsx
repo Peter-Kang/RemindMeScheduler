@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 
 //inputs
   //Message
-import { EditReminderAddMessage } from "./EditReminderAddMessage.tsx";
+import { EditReminderAddMessage } from "./Componets/EditReminderAddMessage.tsx";
   //Frequency
-import { EditReminderAddFrequency } from "./EditReminderFrequencyValueInputForm.tsx"
+import { EditReminderAddFrequency } from "./Componets/EditReminderFrequencyValueInputForm.tsx"
   //Date picker
-import { ScheduleDateTimePicker } from "./EditDatePicker.tsx";
+import { ScheduleDateTimePicker } from "./Componets/EditDatePicker.tsx";
 
 export interface EditReminderAddButtonClick{
   createToDoButtonClickCallback: ({ })=>void
@@ -19,6 +19,7 @@ export const EditReminderAddInputForm:React.FC<EditReminderAddButtonClick> = ({c
   const [startingDateValue, setStartingDateValue] = useState(new Date())
   const [messageValueInput, updateMessageValueInput ] = useState('')
   const [frequencyValueInputInt, updateFrequencyValueInputInt ] = useState(0)
+  let valid = startingDateValue && messageValueInput !== '' && frequencyValueInputInt != 0
 
     return (
       <Row md={12}className="d-flex align-items-center">
@@ -32,7 +33,7 @@ export const EditReminderAddInputForm:React.FC<EditReminderAddButtonClick> = ({c
             <ScheduleDateTimePicker startingDate={startingDateValue} setStartingDate={setStartingDateValue}/>
         </Col>
         <Col sm={1}>
-            <Button onClick={() => createToDoButtonClickCallback({startingDateValue,messageValueInput,frequencyValueInputInt})}>
+            <Button onClick={() => (valid? createToDoButtonClickCallback({startingDateValue,messageValueInput,frequencyValueInputInt}): null) } >
               Add
             </Button>
         </Col>
