@@ -8,36 +8,11 @@ import {EditReminderAddInputForm} from "./EditReminderAddInputForm/EditReminderA
 //Rows/EDIT
 import {EditReminderRowEditInputForm, ReminderInstance} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm"
 
-import { useGetAllTodos, createToDoAPICall } from "../../hooks/useTodos.js";
-
-export const APICreateTodos = () => {
-	const createTodo = async (newTodoData, listOfReminders) => {
-		await createToDoAPICall(newTodoData);
-	}
-	return createTodo;
-}
-
+import { useTodos } from "../../hooks/useTodos.js";
 
 const EditReminders = () =>
 {
-    const {data, loading, error } = useGetAllTodos();
-    const createTodo = APICreateTodos();
-
-    if(loading)
-    {
-        return 'loading'
-    }
-    if(error)
-    {
-        console.log(error)
-        return 'error'
-    }
-    let reminderResultArray =  []
-    if(data?.data?.todos)
-    {
-        reminderResultArray = data.data.todos
-    }
-
+    const {todos, createToDo} = useTodos();
     return (
         <Container>
             <br/>
@@ -48,12 +23,12 @@ const EditReminders = () =>
             </Row>
             <br/>
             <h2><font color='white'>Add</font></h2>
-            <EditReminderAddInputForm createToDoButtonClickCallback={createTodo}/>
+            <EditReminderAddInputForm createToDoButtonClickCallback={createToDo}/>
             <br/>
             <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
-            <EditReminderRowEditInputForm arrayOfReminderInstances={reminderResultArray}/>
+            <EditReminderRowEditInputForm arrayOfReminderInstances={todos}/>
         </Container>
     );
 }
