@@ -3,6 +3,7 @@ import '../../assets/Current.css';
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { getHealthCheck, useHealthCheck } from '../../hooks/healthCheck.js'
+
 import { Link } from "react-router-dom";
 
 const Current = () =>
@@ -11,7 +12,7 @@ const Current = () =>
 
     return (
         <Container>
-            <Button onClick={retrigger}>Refresh</Button>
+            <Button onClick={retrigger}>Live check</Button>
             <span><font color ='white'>{' '}{isAlive.message}</font></span>
             <br/>
             <Row className="d-flex align-items-center">
