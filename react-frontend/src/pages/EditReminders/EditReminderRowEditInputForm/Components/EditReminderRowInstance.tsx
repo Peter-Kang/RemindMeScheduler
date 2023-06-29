@@ -5,7 +5,7 @@ import { EditReminderRowMessage } from './Components/EditReminderRowMessage.tsx'
 import { EditReminderRowStatus } from './Components/EditReminderRowStatus.tsx';
 import { EditReminderRowFrequency } from './Components/EditReminderRowFrequencyInHours.tsx';
 import { EditReminderRowStartingDate } from './Components/EditReminderRowStartingDate.tsx'
-
+import './assets/EditReminderRowInstance.css'
 
 export interface  ReminderInstance {
     _id: string;
@@ -28,7 +28,7 @@ export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderI
     const [startDateTimeValueInput, updateStartDateTimeValueInput ]= useState(reminderInstance.startDateTime);
     
     return (
-    <Row md={12} key={reminderInstance._id}>
+    <Row md={12} key={reminderInstance._id} id="editEditRows">
         <Col sm={2}>
             <p>{reminderInstance._id}</p>
         </Col>

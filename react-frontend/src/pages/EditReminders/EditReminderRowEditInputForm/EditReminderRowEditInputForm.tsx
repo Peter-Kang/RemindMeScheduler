@@ -12,7 +12,7 @@ export interface EditReminderRowEditInputFormProp {
 
 export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormProp> = ({arrayOfReminderInstances}) => {
     return( <div>
-                <Row key='Header' md={12}className="d-flex align-items-center">
+                <Row key='Header' md={12} className="d-flex align-items-center">
                     <Col sm={2}><p id="EditIDLabel">ID</p></Col>
                     <Col sm={4}><p id="EditMessageLabel">Message</p></Col>
                     <Col sm={1}><p id="EditStatusLabel">Status</p></Col>
