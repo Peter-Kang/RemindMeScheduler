@@ -12,19 +12,11 @@ export const createToDoAPICall = async (params) => {
 		"frequencyInHours":String(params.frequencyValueInputInt) };
 	console.log(filteredParams);
 	const { data } = await API.post('/ToDo/CreateToDo',filteredParams);
+
 	return data;
 };
 
 //hooks
-export const useCreateTodos = () => {
-	const createTodo = async (newTodoData) => {
-		await createToDoAPICall(newTodoData);
-		const newTodos = await useTodos()
-		return newTodos;
-	}
-	return createTodo;
-}
-
-export const useTodos = () => {
+export const useGetAllTodos = () => {
 	return useRequest('/ToDo/GetAllToDo');
 }
