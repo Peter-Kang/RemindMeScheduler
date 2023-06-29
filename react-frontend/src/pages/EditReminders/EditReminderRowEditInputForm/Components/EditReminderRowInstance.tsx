@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { EditReminderRowMessage } from './Components/EditReminderRowMessage.tsx';
 import { EditReminderRowStatus } from './Components/EditReminderRowStatus.tsx';
 import { EditReminderRowFrequency } from './Components/EditReminderRowFrequencyInHours.tsx';
+import { EditReminderRowStartingDate } from './Components/EditReminderRowStartingDate.tsx'
+
 
 export interface  ReminderInstance {
     _id: string;
@@ -48,7 +50,12 @@ export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderI
                 setFrequencyCallback = {updateFrequencyInHoursValueInput}
                 />
         </Col>
-        <Col sm={2}><p>{reminderInstance.startDateTime.toString()}</p></Col>
+        <Col sm={2}>
+            <EditReminderRowStartingDate  id= {reminderInstance._id+'startDate'}
+                startingDate={startDateTimeValueInput }
+                setStartingDate= {updateStartDateTimeValueInput}
+                />
+        </Col>
         <Col sm={2}>
             <Link to="/" className="btn btn-outline-success">Update</Link>
             <Link to="/" className="btn btn-outline-danger">Remove</Link>
