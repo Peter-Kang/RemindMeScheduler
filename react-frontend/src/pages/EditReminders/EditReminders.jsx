@@ -14,7 +14,7 @@ import { useTodos } from "../../hooks/useTodos.js";
 
 const EditReminders = () =>
 {
-    const {todos, createToDo, updateToDo} = useTodos();
+    const {todos, createToDo, updateToDo, deleteToDo} = useTodos();
     return (
         <Container>
             <br/>
@@ -30,7 +30,7 @@ const EditReminders = () =>
             <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
-            <EditReminderRowEditInputForm arrayOfReminderInstances={todos} updateCallback={updateToDo} />
+            <EditReminderRowEditInputForm arrayOfReminderInstances={todos} updateCallback={updateToDo} deleteCallback={deleteToDo}/>
         </Container>
     );
 }

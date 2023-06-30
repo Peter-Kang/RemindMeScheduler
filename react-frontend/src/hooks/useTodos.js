@@ -35,6 +35,15 @@ const updateToDoAPICall = async (params) => {
 	return data;
 }
 
+const deleteToDoAPICall = async (params) =>
+{
+	console.log ('deleteToDoAPICall');
+	const filteredParams = {"context":"ToDo"};
+	const uri ='/ToDo/'+params.id;
+	console.log(uri);
+	await API.delete(uri,filteredParams);
+}
+
 //hooks
 const useGetAllTodos = () => {
 	//List of messages current state
@@ -71,5 +80,11 @@ export const useTodos = () => {
 		getAllTodoAPICall();
 	}
 
-	return {todos, createToDo, updateToDo};
+	const deleteToDo = async (params) =>
+	{
+		await deleteToDoAPICall(params);
+		getAllTodoAPICall();
+	}
+
+	return {todos, createToDo, updateToDo, deleteToDo};
 }

@@ -177,9 +177,10 @@ const deleteTodoController = async ({
   response,
 }: RouterContext<string>) => {
   try {
-    const numberOfTodo = await Todo.deleteOne({
+    await Todo.deleteOne({
       _id: new Bson.ObjectId(params.todoId),
     });
+    const numberOfTodo = await Todo.countDocuments({ _id: new Bson.ObjectId(params.todoId) });
     console.log(numberOfTodo);
     if (numberOfTodo !== 0) {
       response.status = 404;

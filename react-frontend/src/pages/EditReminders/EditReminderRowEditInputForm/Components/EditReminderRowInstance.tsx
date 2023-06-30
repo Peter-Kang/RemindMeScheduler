@@ -21,9 +21,10 @@ export interface  ReminderInstance {
 export interface EditReminderRowEditProp {
     reminderInstance: ReminderInstance;
     updateCallback: ({ })=>void;
+    deleteCallback: ({ })=>void;
 };
 
-export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderInstance, updateCallback}) => {
+export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderInstance, updateCallback, deleteCallback}) => {
     const id = reminderInstance._id;
     const [messageValueInput, updateMessageValueInput ] = useState(reminderInstance.message);
     const [statusValueInput, updateStatusValueInput ] = useState(reminderInstance.status);
@@ -66,7 +67,11 @@ export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderI
                 className="btn-outline-success">
                 Update
             </Button>
-            <Link to="/" className="btn btn-outline-danger">Remove</Link>
+            <Button onClick={ () => deleteCallback({id})} 
+                variant="button"
+                className="btn-outline-danger">
+                Remove
+            </Button>
         </Col>
     </Row>)
 }
