@@ -6,6 +6,7 @@ import { EditReminderRowStatus } from './Components/EditReminderRowStatus.tsx';
 import { EditReminderRowFrequency } from './Components/EditReminderRowFrequencyInHours.tsx';
 import { EditReminderRowStartingDate } from './Components/EditReminderRowStartingDate.tsx'
 import './assets/EditReminderRowInstance.css'
+import Button from 'react-bootstrap/Button';
 
 export interface  ReminderInstance {
     _id: string;
@@ -19,14 +20,17 @@ export interface  ReminderInstance {
 
 export interface EditReminderRowEditProp {
     reminderInstance: ReminderInstance;
+    updateCallback: ({ })=>void;
 };
 
-export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderInstance}) => {
+export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderInstance, updateCallback}) => {
+    const id = reminderInstance._id;
     const [messageValueInput, updateMessageValueInput ] = useState(reminderInstance.message);
     const [statusValueInput, updateStatusValueInput ] = useState(reminderInstance.status);
     const [frequencyInHoursValueInput, updateFrequencyInHoursValueInput ] = useState(reminderInstance.frequencyInHours);
     const [startDateTimeValueInput, updateStartDateTimeValueInput ]= useState(reminderInstance.startDateTime);
-    
+
+    const valid = startDateTimeValueInput && messageValueInput !== '' && frequencyInHoursValueInput != 0;
     return (
     <Row md={12} key={reminderInstance._id} id="editEditRows">
         <Col sm={2}>
@@ -57,7 +61,11 @@ export const EditReminderRowEdit:React.FC<EditReminderRowEditProp> = ({reminderI
                 />
         </Col>
         <Col sm={2}>
-            <Link to="/" className="btn btn-outline-success">Update</Link>
+            <Button onClick={ () => (valid ? updateCallback({id , messageValueInput,startDateTimeValueInput,frequencyInHoursValueInput, statusValueInput }): null)} 
+                variant="button"
+                className="btn-outline-success">
+                Update
+            </Button>
             <Link to="/" className="btn btn-outline-danger">Remove</Link>
         </Col>
     </Row>)

@@ -8,9 +8,10 @@ import {ReminderInstance, EditReminderRowEdit} from './Components/EditReminderRo
 export interface EditReminderRowEditInputFormProp {
     key: string;
     arrayOfReminderInstances: ReminderInstance[];
+    updateCallback: ({ })=>void;
 };
 
-export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormProp> = ({arrayOfReminderInstances}) => {
+export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormProp> = ({arrayOfReminderInstances,updateCallback}) => {
     return( <div>
                 <Row key='Header' md={12} className="d-flex align-items-center">
                     <Col sm={2}><p id="EditIDLabel">ID</p></Col>
@@ -22,7 +23,7 @@ export const EditReminderRowEditInputForm:React.FC<EditReminderRowEditInputFormP
                 </Row>
                 <hr/>
                 <div>
-                    {arrayOfReminderInstances.map((Instance:ReminderInstance) => <EditReminderRowEdit key={ Instance._id } reminderInstance = { Instance } />)}
+                    {arrayOfReminderInstances.map((Instance:ReminderInstance) => <EditReminderRowEdit key={ Instance._id } reminderInstance = { Instance } updateCallback = {updateCallback}/>)}
                 </div>
             </div>)
 }

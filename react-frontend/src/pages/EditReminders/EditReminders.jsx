@@ -1,18 +1,20 @@
-import {React, useState} from "react";
+import { React } from "react";
 import '../../assets/EditReminders.css';
 import { Link } from "react-router-dom";
 //bootstrap
-import {Container, Row, Col, Alert} from "react-bootstrap";
+import {Container, Row, Col } from "react-bootstrap";
+
+//Create
 import {EditReminderAddInputForm} from "./EditReminderAddInputForm/EditReminderAddInputForm"
 
 //Rows/EDIT
-import {EditReminderRowEditInputForm, ReminderInstance} from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm"
+import { EditReminderRowEditInputForm } from "./EditReminderRowEditInputForm/EditReminderRowEditInputForm"
 
 import { useTodos } from "../../hooks/useTodos.js";
 
 const EditReminders = () =>
 {
-    const {todos, createToDo} = useTodos();
+    const {todos, createToDo, updateToDo} = useTodos();
     return (
         <Container>
             <br/>
@@ -28,7 +30,7 @@ const EditReminders = () =>
             <hr/>
             <h2><font color='white'>Edit</font></h2>
             <br/>
-            <EditReminderRowEditInputForm arrayOfReminderInstances={todos}/>
+            <EditReminderRowEditInputForm arrayOfReminderInstances={todos} updateCallback={updateToDo} />
         </Container>
     );
 }

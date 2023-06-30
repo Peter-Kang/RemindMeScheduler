@@ -4,24 +4,23 @@ import Button from 'react-bootstrap/Button';
 
 //inputs
   //Message
-import { EditReminderAddMessage } from "./Componets/EditReminderAddMessage.tsx";
+import { EditReminderAddMessage } from "./Components/EditReminderAddMessage.tsx";
   //Frequency
-import { EditReminderAddFrequency } from "./Componets/EditReminderFrequencyValueInputForm.tsx"
+import { EditReminderAddFrequency } from "./Components/EditReminderFrequencyValueInputForm.tsx"
   //Date picker
-import { ScheduleDateTimePicker } from "./Componets/EditDatePicker.tsx";
+import { ScheduleDateTimePicker } from "./Components/EditDatePicker.tsx";
 
 export interface EditReminderAddButtonClick{
-  listOfReminders: [];
-  createToDoButtonClickCallback: ({ })=>void
+  createToDoButtonClickCallback: ({ })=>void;
 }
 
-export const EditReminderAddInputForm:React.FC<EditReminderAddButtonClick> = ({listOfReminders,createToDoButtonClickCallback}) => {
+export const EditReminderAddInputForm:React.FC<EditReminderAddButtonClick> = ({createToDoButtonClickCallback}) => {
 
   const [startingDateValue, setStartingDateValue] = useState(new Date())
   const [messageValueInput, updateMessageValueInput ] = useState('')
   const [frequencyValueInputInt, updateFrequencyValueInputInt ] = useState(0)
  
-  let valid = startingDateValue && messageValueInput !== '' && frequencyValueInputInt != 0
+  let valid = startingDateValue && messageValueInput !== '' && frequencyValueInputInt != 0;
   
     return (
       <Row md={12}className="d-flex align-items-center">
@@ -35,7 +34,7 @@ export const EditReminderAddInputForm:React.FC<EditReminderAddButtonClick> = ({l
             <ScheduleDateTimePicker startingDate={startingDateValue} setStartingDate={setStartingDateValue}/>
         </Col>
         <Col sm={1}>
-            <Button onClick={() => (valid? createToDoButtonClickCallback({startingDateValue,messageValueInput,frequencyValueInputInt, listOfReminders }): null) } >
+            <Button onClick={() => (valid? createToDoButtonClickCallback({startingDateValue,messageValueInput,frequencyValueInputInt }): null) } >
               Add
             </Button>
         </Col>

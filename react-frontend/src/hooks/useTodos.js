@@ -19,11 +19,25 @@ const createToDoAPICall = async (params) => {
 	return data;
 };
 
+const updateToDoAPICall = async (params) => {
+	console.log('updateToDoAPICall');
+	const filteredParams = { 
+		"context":"ToDo",
+		"id":params.id,
+		"message": params.messageValueInput,
+		"startDateTime":String(params.startDateTimeValueInput),
+		"frequencyInHours":String(params.frequencyInHoursValueInput),
+		"status":params.statusValueInput };
 
+	console.log(filteredParams);
+	const uri = '/ToDo/'+params.id;
+	const { data } = await API.patch(uri,filteredParams);
+	return data;
+}
 
 //hooks
 const useGetAllTodos = () => {
-	//live as message comes in
+	//List of messages current state
 	return useRequest('/ToDo/GetAllToDo');
 };
 
@@ -39,7 +53,6 @@ export const useTodos = () => {
 			reminderResultArray = data.data.todos;
 		}
 		setToDos(reminderResultArray);
-		console.log(todos);
 	};
 
 	useEffect(()=> {
@@ -52,5 +65,11 @@ export const useTodos = () => {
 		getAllTodoAPICall();
 	}
 
-	return {todos, createToDo};
+	const updateToDo = async (params) =>
+	{
+		await updateToDoAPICall(params);
+		getAllTodoAPICall();
+	}
+
+	return {todos, createToDo, updateToDo};
 }
