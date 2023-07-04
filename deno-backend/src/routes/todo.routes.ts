@@ -1,4 +1,4 @@
-import { Router } from '../../deps.ts'
+import {  Router } from '../../deps.ts'
 import todoController from '../controllers/todo.controller.ts';
 import { createToDoSchema, updateToDoSchema } from '../db/schema/todo.schema.ts'
 import validate from '../middleware/validate.ts'

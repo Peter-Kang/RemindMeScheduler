@@ -22,6 +22,23 @@ router.get<string>('/HealthCheck', (ctx: RouterContext<string>) => {
   };
 });
 
+router.get<string>("/wss", (ctx) => {
+  if (!ctx.isUpgradable) {
+    ctx.throw(501);
+  }
+  const ws = ctx.upgrade();
+  ws.onopen = () => {
+    console.log("Connected to client");
+    ws.send("Hello from server!");
+  };
+  ws.onmessage = (m) => {
+    console.log("Got message from client: ", m.data);
+    ws.send(m.data as string);
+    ws.close();
+  };
+  ws.onclose = () => console.log("Disconnected from client");
+});
+
 //evoke routers
 appRouter.init(app)
 app.use(router.routes()); // Implement our router
