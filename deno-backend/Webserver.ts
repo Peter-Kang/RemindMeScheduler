@@ -21,7 +21,7 @@ router.get<string>('/HealthCheck', (ctx: RouterContext<string>) => {
     message: "Alive!"
   };
 });
-
+/*
 router.get<string>("/wss", (ctx) => {
   if (!ctx.isUpgradable) {
     ctx.throw(501);
@@ -38,6 +38,25 @@ router.get<string>("/wss", (ctx) => {
   };
   ws.onclose = () => console.log("Disconnected from client");
 });
+*/
+
+const webSocketReminderHandler = (
+  ws: WebSocket) => 
+{
+  ws.onopen = () => {
+    console.log("Connected to client");
+    ws.send("Hello from server!");
+  };
+  ws.onmessage = (m) => {
+    console.log("Got message from client: ", m.data);
+    ws.send(m.data as string);
+    ws.close();
+  };
+  ws.onclose = () => console.log("Disconnected from client");
+};
+router.get<string>("/wss", async ctx=>{ 
+  const sock = await ctx.upgrade();
+  webSocketReminderHandler(sock);});
 
 //evoke routers
 appRouter.init(app)
