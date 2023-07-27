@@ -13,8 +13,7 @@ export const useHealthCheck = () => {
   const [isAlive, setIsAlive] = useState('loading...')
   
   // shouldRetrigger is a variable that can force the effect to run again
-  const [shouldRetrigger, setShouldRetrigger] = useState(true)
-
+  const [shouldRetrigger, setShouldRetrigger] = useState(true);
   useEffect(() => {
       // make an async function to fetch, and then update the state
       const getAndUpdateHealthCheck = async () => {

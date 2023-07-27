@@ -87,18 +87,21 @@ export const useTodos = () => {
 
 export const useActiveTodos = () => {
   const [activeTodos, setActiveTodos] = useState([]);
-  const ws = new WebSocket("ws://localhost:8000/wss");
+  const [webSockets, setWebSocket] = useState(new WebSocket("ws://localhost:8000/wss"));
 
   const initWebSockets = async () => {
-    ws.onopen = () => console.log("Connecting to server");
-    ws.onmessage = (m) => {
+    webSockets.onopen = () => console.log("Connecting to server");
+    webSockets.onmessage = (m) => {
       // update list of reminders
       console.log(m.data);
       setActiveTodos(m.data);
     };
-    ws.onclose = () => console.log("Disconnected from server");
+    webSockets.onclose = () => console.log("Disconnected from server");
   };
-  initWebSockets();
+  if(webSockets.readyState == WebSocket.CONNECTING)
+  {
+    initWebSockets();
+  }
 
   useEffect(() => {}, [activeTodos]);
 

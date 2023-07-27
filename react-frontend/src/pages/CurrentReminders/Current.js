@@ -2,21 +2,15 @@ import React from "react";
 import '../../assets/Current.css';
 import {Container, Row, Col, Alert} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import { getHealthCheck, useHealthCheck } from '../../hooks/healthCheck.js'
+import { useHealthCheck } from '../../hooks/healthCheck.js'
 
 import { Link } from "react-router-dom";
+import {useActiveTodos}  from "../../hooks/useTodos.js";
 
 const Current = () =>
 {
-    const {isAlive, retrigger} = useHealthCheck()
-
-    const ws = new WebSocket("ws://localhost:8000/wss");
-    ws.onopen = () => console.log("Connected to server");
-    ws.onmessage = (m) => {
-        console.log("Got message from server: ", m.data);
-        ws.send(`Some message ${crypto.randomUUID()}`);
-    };
-    ws.onclose = () => console.log("Disconnected from server");
+    const {isAlive, retrigger} = useHealthCheck();
+    const {activeTodos} = useActiveTodos();
 
     return (
         <Container>
