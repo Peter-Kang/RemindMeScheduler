@@ -1,6 +1,5 @@
 import { db } from '../../utils/connectToDB.ts';
-import { ObjectId } from '../../../deps.ts';
-import { Int32 } from 'https://deno.land/x/web_bson@v0.2.3/mod.ts';
+import { ObjectId, Int32 } from '../../../deps.ts';
 
 export interface TodoSchema {
   _id?: ObjectId;

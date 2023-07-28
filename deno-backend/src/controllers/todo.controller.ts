@@ -1,7 +1,7 @@
-import { Int32 } from "https://deno.land/x/web_bson@v0.2.3/mod.ts";
 import type { RouterContext } from "../../deps.ts";
-import { Bson } from "../../deps.ts";
+import { Bson, Int32 } from "../../deps.ts";
 import { Todo } from "../db/models/todo.model.ts";
+import {TodoSchema} from "../db/models/todo.model.ts"
 import type {
   CreateTodoInput,
   UpdateTodoInput,
@@ -154,7 +154,7 @@ const findAllTodosController = async ({
     ];
 
     const cursor = Todo.aggregate(pipeline);
-    const cursorTodos = cursor.map((todo) => todo);
+    const cursorTodos = cursor.map((todo: TodoSchema) => todo);
     const todos = await cursorTodos;
 
     response.status = 200;
@@ -214,8 +214,8 @@ const getActiveTodoController = async () => {
     ];
 
     const cursor = Todo.aggregate(pipeline);
-    const cursorTodos = cursor.map((todo) => todo);
-    const todos: {} = await cursorTodos;
+    const cursorTodos = cursor.map((todo:TodoSchema) => todo);
+    const todos = await cursorTodos;
     console.log(todos);
     return todos;
   } catch (_error) {
