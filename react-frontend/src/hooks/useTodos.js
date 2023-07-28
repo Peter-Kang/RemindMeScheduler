@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import API from "../utils/api.js";
 import useRequest from "./useRequest.js";
 
@@ -105,5 +105,5 @@ export const useActiveTodos = () => {
     initWebSockets();
   }
 
-  return { activeTodos };
+  return { activeTodos, webSockets };
 };

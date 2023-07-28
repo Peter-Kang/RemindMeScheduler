@@ -1,12 +1,11 @@
-import { Int32 } from 'https://deno.land/x/web_bson@v0.2.3/mod.ts';
-import type { RouterContext } from '../../deps.ts';
-import { Bson } from '../../deps.ts';
-import { Todo } from '../db/models/todo.model.ts';
+import { Int32 } from "https://deno.land/x/web_bson@v0.2.3/mod.ts";
+import type { RouterContext } from "../../deps.ts";
+import { Bson } from "../../deps.ts";
+import { Todo } from "../db/models/todo.model.ts";
 import type {
   CreateTodoInput,
   UpdateTodoInput,
-} from '../db/schema/todo.schema.ts';
-
+} from "../db/schema/todo.schema.ts";
 
 // [...] Create Todo Controller
 const createTodoController = async ({
@@ -21,10 +20,10 @@ const createTodoController = async ({
     const totoExists = await Todo.findOne({ message });
     if (totoExists) {
       response.status = 409;
-      response.statusText = 'Create fail. Title already exists'
+      response.statusText = "Create fail. Title already exists";
       response.body = {
-        status: 'fail',
-        message: 'Todo with that title already exists',
+        status: "fail",
+        message: "Todo with that title already exists",
       };
       return;
     }
@@ -35,11 +34,11 @@ const createTodoController = async ({
     const startDateTimeDate = new Date(startDateTime);
     const frequencyInHoursInt32 = new Int32(frequencyInHours);
     const status = "incomplete";
-//add it
+    //add it
     const todoId: string | Bson.ObjectId = await Todo.insertOne({
       message,
-      startDateTime:startDateTimeDate,
-      frequencyInHours:frequencyInHoursInt32,
+      startDateTime: startDateTimeDate,
+      frequencyInHours: frequencyInHoursInt32,
       status,
       createdAt,
       updatedAt,
@@ -47,25 +46,24 @@ const createTodoController = async ({
 
     if (!todoId) {
       response.status = 500;
-      response.body = { status: 'error', message: 'Error creating todo' };
+      response.body = { status: "error", message: "Error creating todo" };
       return;
     }
 
     //check if it is created
-    const todo = await Todo.findOne({_id: todoId})
+    const todo = await Todo.findOne({ _id: todoId });
     response.status = 201;
-    response.statusText = 'Created'
+    response.statusText = "Created";
     response.body = {
-      status: 'success',
+      status: "success",
       data: { todo },
     };
   } catch (error) {
     response.status = 500;
-    response.body = { status: 'error', message: error.message };
+    response.body = { status: "error", message: error.message };
     return;
   }
 };
-
 
 // [...] Update Todo Controller
 const updateTodoController = async ({
@@ -74,7 +72,7 @@ const updateTodoController = async ({
   response,
 }: RouterContext<string>) => {
   try {
-    const payload: UpdateTodoInput['body'] = await request.body().value;
+    const payload: UpdateTodoInput["body"] = await request.body().value;
 
     const updatedInfo = await Todo.updateOne(
       { _id: new Bson.ObjectId(params.todoId) },
@@ -85,8 +83,8 @@ const updateTodoController = async ({
     if (!updatedInfo.matchedCount) {
       response.status = 404;
       response.body = {
-        status: 'fail',
-        message: 'No todo with that Id exists',
+        status: "fail",
+        message: "No todo with that Id exists",
       };
       return;
     }
@@ -95,12 +93,12 @@ const updateTodoController = async ({
 
     response.status = 200;
     response.body = {
-      status: 'success',
+      status: "success",
       data: { todo: updatedTodo },
     };
   } catch (error) {
     response.status = 500;
-    response.body = { status: 'error', message: error.message };
+    response.body = { status: "error", message: error.message };
     return;
   }
 };
@@ -116,20 +114,20 @@ const findTodoController = async ({
     if (!todo) {
       response.status = 404;
       response.body = {
-        status: 'success',
-        message: 'No todo with that Id exists',
+        status: "success",
+        message: "No todo with that Id exists",
       };
       return;
     }
 
     response.status = 200;
     response.body = {
-      status: 'success',
+      status: "success",
       data: { todo },
     };
   } catch (error) {
     response.status = 500;
-    response.body = { status: 'error', message: error.message };
+    response.body = { status: "error", message: error.message };
     return;
   }
 };
@@ -140,8 +138,8 @@ const findAllTodosController = async ({
   response,
 }: RouterContext<string>) => {
   try {
-    const page = request.url.searchParams.get('page');
-    const limit = request.url.searchParams.get('limit');
+    const page = request.url.searchParams.get("page");
+    const limit = request.url.searchParams.get("limit");
     const intPage = page ? parseInt(page) : 1;
     const intLimit = limit ? parseInt(limit) : 10;
     const skip = (intPage - 1) * intLimit;
@@ -161,13 +159,13 @@ const findAllTodosController = async ({
 
     response.status = 200;
     response.body = {
-      status: 'success',
+      status: "success",
       results: todos.length,
       data: { todos },
     };
   } catch (error) {
     response.status = 500;
-    response.body = { status: 'error', message: error.message };
+    response.body = { status: "error", message: error.message };
     return;
   }
 };
@@ -181,13 +179,15 @@ const deleteTodoController = async ({
     await Todo.deleteOne({
       _id: new Bson.ObjectId(params.todoId),
     });
-    const numberOfTodo = await Todo.countDocuments({ _id: new Bson.ObjectId(params.todoId) });
+    const numberOfTodo = await Todo.countDocuments({
+      _id: new Bson.ObjectId(params.todoId),
+    });
     console.log(numberOfTodo);
     if (numberOfTodo !== 0) {
       response.status = 404;
       response.body = {
-        status: 'success',
-        message: 'No todo with that Id exists',
+        status: "success",
+        message: "No todo with that Id exists",
       };
       return;
     }
@@ -195,8 +195,31 @@ const deleteTodoController = async ({
     response.status = 204;
   } catch (error) {
     response.status = 500;
-    response.body = { status: 'error', message: error.message };
+    response.body = { status: "error", message: error.message };
     return;
+  }
+};
+
+// Get all reminders that are active
+const getActiveTodoController = async () => {
+  try {
+    const pipeline = [
+      {
+        $match: {
+          status: {
+            $in: ["incomplete", "autorepeat"],
+          },
+        },
+      },
+    ];
+
+    const cursor = Todo.aggregate(pipeline);
+    const cursorTodos = cursor.map((todo) => todo);
+    const todos: {} = await cursorTodos;
+    console.log(todos);
+    return todos;
+  } catch (_error) {
+    return {};
   }
 };
 
@@ -206,4 +229,5 @@ export default {
   findTodoController,
   findAllTodosController,
   deleteTodoController,
+  getActiveTodoController,
 };

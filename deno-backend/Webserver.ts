@@ -6,6 +6,7 @@ import {
   RouterContext,
 } from "./deps.ts";
 import appRouter from "./src/routes/index.ts";
+import todoController from "./src/controllers/todo.controller.ts";
 
 const app = new Application();
 const router = new Router(); //Create the new router
@@ -33,9 +34,14 @@ const webSocketInitReminderHandlers = (ws: WebSocket) => {
 router.get<string>("/wss", (ctx: RouterContext<string>) => {
   const sock: WebSocket = ctx.upgrade();
   webSocketInitReminderHandlers(sock);
-  setInterval(() => {
-    sock.send("hello");
-  }, 60000);
+  setInterval(async () => {
+    const todos: {} = await todoController.getActiveTodoController();
+    if (sock.readyState !== WebSocket.CLOSED) {
+      const value = JSON.stringify(todos);
+      console.log(value);
+      sock.send(value);
+    }
+  }, 10000);
   return sock;
 });
 
