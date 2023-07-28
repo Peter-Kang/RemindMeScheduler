@@ -23,19 +23,21 @@ router.get<string>("/HealthCheck", (ctx: RouterContext<string>) => {
 const webSocketInitReminderHandlers = (ws: WebSocket) => {
   ws.onopen = () => {
     console.log("Connected to client");
-    ws.send("Hello from server!");
   };
   ws.onclose = () => console.log("Disconnected from client");
-  ws.onmessage = (m) => { console.log(m.data); }
+  ws.onmessage = (m) => {
+    console.log(m.data);
+  };
 };
 
-router.get<string>(
-  "/wss", (ctx: RouterContext<string>) => {
-    const sock =  ctx.upgrade();
-    webSocketInitReminderHandlers(sock);
-    return sock;
-  }
-);
+router.get<string>("/wss", (ctx: RouterContext<string>) => {
+  const sock: WebSocket = ctx.upgrade();
+  webSocketInitReminderHandlers(sock);
+  setInterval(() => {
+    sock.send("hello");
+  }, 60000);
+  return sock;
+});
 
 //evoke routers
 appRouter.init(app);

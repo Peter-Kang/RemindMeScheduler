@@ -65,6 +65,7 @@ export const useTodos = () => {
   };
 
   useEffect(() => {
+    //init the todos
     getAllTodoAPICall();
   }, []);
 
@@ -87,7 +88,9 @@ export const useTodos = () => {
 
 export const useActiveTodos = () => {
   const [activeTodos, setActiveTodos] = useState([]);
-  const [webSockets, setWebSocket] = useState(new WebSocket("ws://localhost:8000/wss"));
+  const [webSockets, setWebSocket] = useState(
+    new WebSocket("ws://localhost:8000/wss")
+  );
 
   const initWebSockets = async () => {
     webSockets.onopen = () => console.log("Connecting to server");
@@ -98,12 +101,9 @@ export const useActiveTodos = () => {
     };
     webSockets.onclose = () => console.log("Disconnected from server");
   };
-  if(webSockets.readyState == WebSocket.CONNECTING)
-  {
+  if (webSockets.readyState == WebSocket.CONNECTING) {
     initWebSockets();
   }
-
-  useEffect(() => {}, [activeTodos]);
 
   return { activeTodos };
 };
