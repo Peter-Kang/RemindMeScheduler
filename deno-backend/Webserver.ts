@@ -1,10 +1,4 @@
-import {
-  Application,
-  Context,
-  oakCors,
-  Router,
-  RouterContext,
-} from "./deps.ts";
+import { Application, oakCors, Router, RouterContext } from "./deps.ts";
 import appRouter from "./src/routes/index.ts";
 import todoController from "./src/controllers/todo.controller.ts";
 
@@ -38,7 +32,6 @@ router.get<string>("/wss", (ctx: RouterContext<string>) => {
     const todos: {} = await todoController.getActiveTodoController();
     if (sock.readyState !== WebSocket.CLOSED) {
       const value = JSON.stringify(todos);
-      console.log(value);
       sock.send(value);
     }
   }, 10000);

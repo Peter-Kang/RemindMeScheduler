@@ -1,7 +1,7 @@
 import type { RouterContext } from "../../deps.ts";
 import { Bson, Int32 } from "../../deps.ts";
 import { Todo } from "../db/models/todo.model.ts";
-import {TodoSchema} from "../db/models/todo.model.ts"
+import { TodoSchema } from "../db/models/todo.model.ts";
 import type {
   CreateTodoInput,
   UpdateTodoInput,
@@ -214,7 +214,7 @@ const getActiveTodoController = async () => {
     ];
 
     const cursor = Todo.aggregate(pipeline);
-    const cursorTodos = cursor.map((todo:TodoSchema) => todo);
+    const cursorTodos = cursor.map((todo: TodoSchema) => todo);
     const todos = await cursorTodos;
     console.log(todos);
     return todos;

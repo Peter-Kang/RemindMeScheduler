@@ -96,8 +96,8 @@ export const useActiveTodos = () => {
     webSockets.onopen = () => console.log("Connecting to server");
     webSockets.onmessage = (m) => {
       // update list of reminders
-      console.log(m.data);
-      setActiveTodos(m.data);
+      const result = JSON.parse(m.data);
+      setActiveTodos(result);
     };
     webSockets.onclose = () => console.log("Disconnected from server");
   };
