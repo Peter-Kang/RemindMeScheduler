@@ -37,10 +37,10 @@ router.get<string>("/wss", (ctx: RouterContext<string>) => {
   setInterval(async () => {
     if (sock.readyState !== WebSocket.CLOSED) {
       const todos: {} = await todoController.getActiveTodoController();
-    }
-    if (sock.readyState !== WebSocket.CLOSED) {
-      const value = JSON.stringify(todos);
-      sock.send(value);
+      if (todos != undefined) {
+        const value = JSON.stringify(todos);
+        sock.send(value);
+      }
     }
   }, 10000);
   return sock;
