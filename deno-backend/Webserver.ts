@@ -35,8 +35,9 @@ router.get<string>("/wss", (ctx: RouterContext<string>) => {
   const sock: WebSocket = ctx.upgrade();
   webSocketInitReminderHandlers(sock);
   setInterval(async () => {
-    if (sock !== WebSocket.CLOSED)
+    if (sock.readyState !== WebSocket.CLOSED) {
       const todos: {} = await todoController.getActiveTodoController();
+    }
     if (sock.readyState !== WebSocket.CLOSED) {
       const value = JSON.stringify(todos);
       sock.send(value);
