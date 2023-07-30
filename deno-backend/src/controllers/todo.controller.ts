@@ -208,7 +208,7 @@ const getActiveTodoController = async () => {
         $match: {
           status: {
             $in: ["incomplete", "autorepeat"],
-          },
+          }, //get the ones that are past the current time
         },
       },
     ];

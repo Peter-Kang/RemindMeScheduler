@@ -16,8 +16,14 @@ router.get<string>("/HealthCheck", (ctx: RouterContext<string>) => {
 });
 
 const webSocketInitReminderHandlers = (ws: WebSocket) => {
-  ws.onopen = () => {
+  ws.onopen = async () => {
     console.log("Connected to client");
+    //send the inital data over
+    const todos: {} = await todoController.getActiveTodoController();
+    if (ws.readyState !== WebSocket.CLOSED) {
+      const value = JSON.stringify(todos);
+      ws.send(value);
+    }
   };
   ws.onclose = () => console.log("Disconnected from client");
   ws.onmessage = (m) => {
@@ -29,7 +35,8 @@ router.get<string>("/wss", (ctx: RouterContext<string>) => {
   const sock: WebSocket = ctx.upgrade();
   webSocketInitReminderHandlers(sock);
   setInterval(async () => {
-    const todos: {} = await todoController.getActiveTodoController();
+    if (sock !== WebSocket.CLOSED)
+      const todos: {} = await todoController.getActiveTodoController();
     if (sock.readyState !== WebSocket.CLOSED) {
       const value = JSON.stringify(todos);
       sock.send(value);

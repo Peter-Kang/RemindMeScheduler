@@ -9,12 +9,8 @@ import { useActiveTodos } from "../../hooks/useTodos.js";
 
 const Current = () => {
   const { isAlive, retrigger } = useHealthCheck();
-  const { activeTodos, webSockets } = useActiveTodos();
+  const { activeTodos } = useActiveTodos();
 
-  window.onbeforeunload = function () {
-    webSockets.onclose = function () {}; // disable onclose handler first
-    webSockets.close();
-  };
   return (
     <Container>
       <Button onClick={retrigger}>Live check</Button>
@@ -30,12 +26,12 @@ const Current = () => {
         </Col>
       </Row>
       <br />
-      {activeTodos.map((x) => (
-        <Row className="d-flex align-items-center">
+      {activeTodos.map((messageItem) => (
+        <Row key={messageItem._id} className="d-flex align-items-center">
           <Col md={12}>
             <Alert variant="success">
               <Row>
-                <Col md={8}>This is a message!</Col>
+                <Col md={8}>{messageItem.message}</Col>
                 <Col md={4} className="d-flex justify-content-end">
                   <Button variant="primary" className="mx-2">
                     Reset
