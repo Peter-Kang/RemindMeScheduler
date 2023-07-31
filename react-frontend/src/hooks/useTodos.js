@@ -86,31 +86,9 @@ export const useTodos = () => {
   return { todos, createToDo, updateToDo, deleteToDo };
 };
 
-/*
-const useMockEndpoint = () => {
-  const [data, setData] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/todoData');
-      const jsonResponse = await response.json();
-      setData(jsonResponse);
-    }
-
-    // on component mount, fetch the data
-    fetchData()
-
-    // on component unmount, cleanup
-    return () => {
-      fetchData.cancel()
-    }
-    
-  }, [])
-}
-*/
-
 export const useActiveTodos = () => {
   const [activeTodos, setActiveTodos] = useState([]);
-  const ws = useRef(null);
+  const ws = useRef(null); // change to a Websocket provider
   useEffect(() => {
     ws.current = new WebSocket("ws://localhost:8000/wss");
     ws.current.onopen = () => console.log("Connecting to server");
@@ -124,6 +102,6 @@ export const useActiveTodos = () => {
       ws.current.close();
     };
   }, []);
-
-  return { activeTodos };
+  const webSocket = ws.current;
+  return { activeTodos, webSocket };
 };

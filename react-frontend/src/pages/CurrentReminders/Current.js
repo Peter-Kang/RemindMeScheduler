@@ -7,9 +7,11 @@ import { useHealthCheck } from "../../hooks/healthCheck.js";
 import { Link } from "react-router-dom";
 import { useActiveTodos } from "../../hooks/useTodos.js";
 
+import MessageNotification from "./Components/MessageNotification.tsx";
+
 const Current = () => {
   const { isAlive, retrigger } = useHealthCheck();
-  const { activeTodos } = useActiveTodos();
+  const { activeTodos, webSocket } = useActiveTodos();
 
   return (
     <Container>
@@ -27,20 +29,13 @@ const Current = () => {
       </Row>
       <br />
       {activeTodos.map((messageItem) => (
-        <Row key={messageItem._id} className="d-flex align-items-center">
-          <Col md={12}>
-            <Alert variant="success">
-              <Row>
-                <Col md={8}>{messageItem.message}</Col>
-                <Col md={4} className="d-flex justify-content-end">
-                  <Button variant="primary" className="mx-2">
-                    Reset
-                  </Button>
-                </Col>
-              </Row>
-            </Alert>
-          </Col>
-        </Row>
+        <MessageNotification
+          key={messageItem._id}
+          _id={messageItem._id}
+          message={messageItem.message}
+          startDateTime={messageItem.startDateTime}
+          webSocket={webSocket}
+        ></MessageNotification>
       ))}
     </Container>
   );

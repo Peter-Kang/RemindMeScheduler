@@ -1,3 +1,4 @@
+import { AggregateCursor } from "https://deno.land/x/mongo@v0.30.1/src/collection/commands/aggregate.ts";
 import type { RouterContext } from "../../deps.ts";
 import { Bson, Int32 } from "../../deps.ts";
 import { Todo } from "../db/models/todo.model.ts";
@@ -153,7 +154,7 @@ const findAllTodosController = async ({
       },
     ];
 
-    const cursor = Todo.aggregate(pipeline);
+    const cursor: AggregateCursor<TodoSchema> = Todo.aggregate(pipeline);
     const cursorTodos = cursor.map((todo: TodoSchema) => todo);
     const todos = await cursorTodos;
 
@@ -209,11 +210,14 @@ const getActiveTodoController = async () => {
           status: {
             $in: ["incomplete", "autorepeat"],
           }, //get the ones that are past the current time
+          startDateTime: {
+            $lte: new Date(),
+          },
         },
       },
     ];
 
-    const cursor = Todo.aggregate(pipeline);
+    const cursor = Todo.aggregate(pipeline) as AggregateCursor<TodoSchema>;
     const cursorTodos = cursor.map((todo: TodoSchema) => todo);
     const todos = await cursorTodos;
     console.log(todos);
