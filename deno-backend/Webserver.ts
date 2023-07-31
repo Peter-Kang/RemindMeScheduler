@@ -26,8 +26,16 @@ const webSocketInitReminderHandlers = (ws: WebSocket) => {
     }
   };
   ws.onclose = () => console.log("Disconnected from client");
-  ws.onmessage = (m) => {
-    console.log(m.data);
+  ws.onmessage = async (m) => {
+    console.log("WS received: " + m.data);
+    // mark incomplete completed and autorepeat to set startDateTime to currentDate + frequencyhours
+    todoController.markDoneTodoController(m.data);
+    //send the data over again
+    const todos: {} = await todoController.getActiveTodoController();
+    if (ws.readyState !== WebSocket.CLOSED) {
+      const value = JSON.stringify(todos);
+      ws.send(value);
+    }
   };
 };
 

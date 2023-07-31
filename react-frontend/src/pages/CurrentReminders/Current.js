@@ -35,6 +35,7 @@ const Current = () => {
           message={messageItem.message}
           startDateTime={messageItem.startDateTime}
           webSocket={webSocket}
+          listOfNotifications={activeTodos}
         ></MessageNotification>
       ))}
     </Container>

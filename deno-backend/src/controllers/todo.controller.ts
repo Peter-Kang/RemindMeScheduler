@@ -33,7 +33,7 @@ const createTodoController = async ({
     const createdAt = new Date();
     const updatedAt = createdAt;
     const startDateTimeDate = new Date(startDateTime);
-    const frequencyInHoursInt32 = new Int32(frequencyInHours);
+    const frequencyInHoursInt32 = new Number(frequencyInHours);
     const status = "incomplete";
     //add it
     const todoId: string | Bson.ObjectId = await Todo.insertOne({
@@ -74,10 +74,11 @@ const updateTodoController = async ({
 }: RouterContext<string>) => {
   try {
     const payload: UpdateTodoInput["body"] = await request.body().value;
-
+    const startDate = new Date(payload.startDateTime);
+    console.log(payload); //update freq to number
     const updatedInfo = await Todo.updateOne(
       { _id: new Bson.ObjectId(params.todoId) },
-      { $set: { ...payload, updatedAt: new Date() } },
+      { $set: { ...payload, startDateTime: startDate, updatedAt: new Date() } },
       { ignoreUndefined: true }
     );
 
@@ -227,6 +228,39 @@ const getActiveTodoController = async () => {
   }
 };
 
+const markDoneTodoController = async (id: string) => {
+  //Check if the todo is set to autorepeat or incomplete
+  const todoExisting = await Todo.findOne({
+    _id: new Bson.ObjectId(id),
+    status: {
+      $in: ["incomplete", "autorepeat"],
+    },
+  });
+
+  if (todoExisting) {
+    let statusToUpdate: string = "autorepeat";
+    const nextDate = new Date();
+    if (todoExisting.status === "incomplete") {
+      statusToUpdate = "completed";
+    } else {
+      nextDate.setHours(
+        nextDate.getHours() + Number(todoExisting.frequencyInHours)
+      );
+    }
+    Todo.updateOne(
+      { _id: new Bson.ObjectId(id) },
+      {
+        $set: {
+          status: statusToUpdate,
+          updatedAt: new Date(),
+          startDateTime: nextDate,
+        },
+      },
+      { ignoreUndefined: true }
+    );
+  }
+};
+
 export default {
   createTodoController,
   updateTodoController,
@@ -234,4 +268,5 @@ export default {
   findAllTodosController,
   deleteTodoController,
   getActiveTodoController,
+  markDoneTodoController,
 };

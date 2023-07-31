@@ -6,6 +6,7 @@ export interface MessageItemProp {
   message: string;
   startDateTime: Date;
   webSocket: WebSocket;
+  listOfNotifications: [];
 }
 
 const MessageNotification: React.FC<MessageItemProp> = ({
@@ -13,6 +14,7 @@ const MessageNotification: React.FC<MessageItemProp> = ({
   message,
   startDateTime,
   webSocket,
+  listOfNotifications,
 }) => {
   /* kept for historic  and example showing
    if component re-renders react will lose track of it
@@ -27,6 +29,8 @@ const MessageNotification: React.FC<MessageItemProp> = ({
   const buttonEvent = function () {
     console.log(_id);
     webSocket.send(_id);
+    //make a call to remove this id element
+    listOfNotifications.filter((element) => element._id === _id);
   };
   return (
     <Row className="d-flex align-items-center">
