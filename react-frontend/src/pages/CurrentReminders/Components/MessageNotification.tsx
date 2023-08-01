@@ -29,11 +29,14 @@ const MessageNotification: React.FC<MessageItemProp> = ({
   const buttonEvent = function () {
     console.log(_id);
     webSocket.send(_id);
-    //make a call to remove this id element
-    listOfNotifications.filter((element) => element._id === _id);
+    //make a call to hide this id element
+    const rowRemove = document.getElementById("Row" + _id);
+    if (rowRemove != undefined) {
+      rowRemove.innerHTML = "";
+    }
   };
   return (
-    <Row className="d-flex align-items-center">
+    <Row id={"Row" + _id} className="d-flex align-items-center">
       <Col md={12}>
         <Alert variant="success">
           <Row>
