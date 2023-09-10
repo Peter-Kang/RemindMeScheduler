@@ -12,7 +12,7 @@ yarn run start
 
 # Stopping
 ```
-yarn stop
+yarn run stop
 ```
 
 # Debug into image
