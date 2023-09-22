@@ -1,5 +1,5 @@
-import {useState, useEffect} from "react";
-import API from '../utils/api.js'
+import { useState, useEffect } from "react";
+import API from "../utils/api.js";
 
 //base hooks
 const useRequest = (initUrl) => {
@@ -20,7 +20,9 @@ const useRequest = (initUrl) => {
       setLoading(false);
     };
     fetchResponse();
-    return (() => { ignore = false; }); // this was ignore = true
+    return () => {
+      ignore = false;
+    }; // this was ignore = true
   }, [initUrl]);
 
   return { data, loading, error };

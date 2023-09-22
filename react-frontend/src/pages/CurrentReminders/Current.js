@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/Current.css";
+import "./Asset/css/Current.css";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useHealthCheck } from "../../hooks/healthCheck.js";
@@ -35,7 +35,6 @@ const Current = () => {
           message={messageItem.message}
           startDateTime={messageItem.startDateTime}
           webSocket={webSocket}
-          listOfNotifications={activeTodos}
         ></MessageNotification>
       ))}
     </Container>

@@ -97,7 +97,12 @@ export const useActiveTodos = () => {
       const result = JSON.parse(m.data);
       setActiveTodos(result);
     };
-    ws.current.onclose = () => console.log("Disconnected from server");
+    ws.current.onclose = () => {
+      console.log("Disconnected from server");
+    };
+    ws.current.onerror = () => {
+      console.log("There was an error");
+    };
     return () => {
       ws.current.close();
     };
