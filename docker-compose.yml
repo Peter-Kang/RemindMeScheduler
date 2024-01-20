@@ -47,7 +47,7 @@ services:
       - "6000:27017"
   mongo-express:
     image: mongo-express
-     container_name: mongo-express
+    container_name: mongo-express
     environment:
       - ME_CONFIG_MONGODB_SERVER=172.17.0.1
       - ME_CONFIG_MONGODB_PORT=6000
