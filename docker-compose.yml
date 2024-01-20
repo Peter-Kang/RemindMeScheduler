@@ -1,5 +1,5 @@
-version: '0'
-name: 'react-deno-mongo'
+version: "0"
+name: "react-deno-mongo"
 services:
   react:
     build:
@@ -8,10 +8,10 @@ services:
     image: react-frontend-image
     container_name: react-frontend-container
     volumes:
-       - ./react-frontend:/usr/src/app/react-frontend
-       - /usr/src/app/react-frontend/node_modules
+      - ./react-frontend:/usr/src/app/react-frontend
+      - /usr/src/app/react-frontend/node_modules
     ports:
-      - '3000:3000' #for docker to know where to redirect hot module reload queries
+      - "3000:3000" #for docker to know where to redirect hot module reload queries
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
@@ -22,14 +22,14 @@ services:
       dockerfile: Dockerfile
     image: deno-image
     container_name: deno-container
-    volumes: 
+    volumes:
       - ./deno-backend:/app
     ports:
-      - '8000:8000'
+      - "8000:8000"
     environment:
       - PORT=8000
     expose:
-    - "8000"
+      - "8000"
     depends_on:
       - mongo
   mongo:
@@ -44,7 +44,23 @@ services:
     volumes:
       - mongo:/data/db
     ports:
-      - '6000:27017'
-
+      - "6000:27017"
+  mongo-express:
+    image: mongo-express
+     container_name: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=172.17.0.1
+      - ME_CONFIG_MONGODB_PORT=6000
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - ME_CONFIG_MONGODB_URL="mongodb://admin:password@172.17.0.1:6000"
+    depends_on:
+      - mongo
+    ports:
+      - "8888:8081"
 volumes:
   mongo:
